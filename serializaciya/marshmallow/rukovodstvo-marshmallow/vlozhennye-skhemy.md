@@ -87,4 +87,60 @@ pprint(result)
 # }
 ```
 
-Вы можете заменить вложенные данные одним значением (или плоским списком значений, если `many = True`), используя поле Pluck.
+Вы можете заменить вложенные данные одним значением (или плоским списком значений, если `many = True`), используя поле [Pluck](../api-marshmallow/polya-fields.md#class-marshmallow.fields.pluck-nested-schemaabc-or-type-or-str-or-callable-schemaabc-field\_name-str).
+
+```python
+class UserSchema(Schema):
+    name = fields.String()
+    email = fields.Email()
+    friends = fields.Pluck("self", "name", many=True)
+
+# ... create ``user`` ...
+serialized_data = UserSchema().dump(user)
+pprint(serialized_data)
+# {
+#     "name": "Steve",
+#     "email": "steve@example.com",
+#     "friends": ["Mike", "Joe"]
+# }
+deserialized_data = UserSchema().load(result)
+pprint(deserialized_data)
+# {
+#     "name": "Steve",
+#     "email": "steve@example.com",
+#     "friends": [{"name": "Mike"}, {"name": "Joe"}]
+# }
+```
+
+## Частичная загрузка
+
+Вложенные схемы также наследуют параметр **partial** родительского вызова загрузки **load**.
+
+```python
+class UserSchemaStrict(Schema):
+    name = fields.String(required=True)
+    email = fields.Email()
+    created_at = fields.DateTime(required=True)
+
+class BlogSchemaStrict(Schema):
+    title = fields.String(required=True)
+    author = fields.Nested(UserSchemaStrict, required=True)
+
+schema = BlogSchemaStrict()
+blog = {"title": "Something Completely Different", "author": {}}
+result = schema.load(blog, partial=True)
+pprint(result)
+# {'author': {}, 'title': 'Something Completely Different'}
+```
+
+Вы можете указать подмножество полей, чтобы разрешить частичную загрузку, используя точечные разделители.
+
+```python
+author = {"name": "Monty"}
+blog = {"title": "Something Completely Different", "author": author}
+result = schema.load(blog, partial=("title", "author.created_at"))
+pprint(result)
+# {'author': {'name': 'Monty'}, 'title': 'Something Completely Different'}
+```
+
+## Двухсторонняя вложенность
