@@ -268,3 +268,170 @@ except ValidationError as err:
 ```
 
 ## Использование оригинальных входных данных
+
+Если вы хотите использовать исходный необработанный ввод, вы можете добавить **pass\_original=True** в <mark style="color:red;">post\_load</mark> или <mark style="color:red;">validates\_schema</mark>.
+
+```python
+from marshmallow import Schema, fields, post_load, ValidationError
+
+class MySchema(Schema):
+    foo = fields.Int()
+    bar = fields.Int()
+
+    @post_load(pass_original=True)
+    def add_baz_to_bar(self, data, original_data, **kwargs):
+        baz = original_data.get("baz")
+        if baz:
+            data["bar"] = data["bar"] + baz
+        return data
+
+schema = MySchema()
+schema.load({"foo": 1, "bar": 2, "baz": 3})
+# {'foo': 1, 'bar': 5}
+```
+
+{% hint style="info" %}
+Поведением по умолчанию для неуказанных полей можно управлять с помощью параметра **unknown**, см. раздел «[Обработка неизвестных полей](bystryi-start.md#obrabotka-neizvestnykh-polei)» для получения дополнительной информации.
+{% endhint %}
+
+## Переопределение способа доступа к атрибутам
+
+По умолчанию **marshmallow** использует [utils.get\_value](../api-marshmallow/vspomogatelnye-funkcii.md#marshmallow.utils.get\_value-obj-key-int-or-str-default-less-than-marshmallow.missing-greater-than) для извлечения атрибутов из различных типов объектов для сериализации. Это будет работать для _**большинства**_ случаев использования.
+
+Однако, если вы хотите указать способ доступа к значениям из объекта, вы можете переопределить метод <mark style="color:red;">get\_attribute</mark>.
+
+```python
+class UserDictSchema(Schema):
+    name = fields.Str()
+    email = fields.Email()
+
+    # Если мы знаем, что сериализуем только словари,
+    # мы можем использовать dict.get для всех входных объектов.
+    def get_attribute(self, obj, key, default):
+        return obj.get(key, default)
+```
+
+## Пользовательская обработка ошибок
+
+По умолчанию <mark style="color:red;">Schema.load()</mark> вызовет [ValidationError](../api-marshmallow/isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), если будут переданы недопустимые данные.
+
+Вы можете указать пользовательскую функцию обработки ошибок для схемы, переопределив метод <mark style="color:red;">handle\_error</mark>. Метод получает [ValidationError](../api-marshmallow/isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) и исходные входные данные для десериализации.
+
+```python
+import logging
+from marshmallow import Schema, fields
+
+class AppError(Exception):
+    pass
+
+class UserSchema(Schema):
+    email = fields.Email()
+
+    def handle_error(self, exc, data, **kwargs):
+        """Log and raise our custom exception when (de)serialization fails."""
+        logging.error(exc.messages)
+        raise AppError("An error occurred with input: {0}".format(data))
+
+schema = UserSchema()
+schema.load({"email": "invalid-email"})  # raises AppError
+```
+
+## Пользовательские параметры класса Meta
+
+Параметры класса **Meta** — это способ настроить и изменить поведение схемы <mark style="color:red;">Schema</mark>. Список доступных опций см. в <mark style="color:red;">документации по API</mark>.
+
+Вы можете добавить пользовательские параметры класса **Meta**, создав подкласс <mark style="color:red;">SchemaOpts</mark>.
+
+### Пример: Конвертирование, Пересмотр
+
+Давайте воспользуемся приведенным выше примером для добавления конвертации в сериализованный вывод. На этот раз мы позволим настраивать ключ конвертации с помощью параметров класса **Meta**.
+
+```python
+# Пример выходных данных
+{
+    'user': {
+        'name': 'Keith',
+        'email': 'keith@stones.com'
+    }
+}
+# Вывод списка
+{
+    'users': [{'name': 'Keith'}, {'name': 'Mick'}]
+}
+```
+
+Во-первых, мы добавим нашу конфигурацию пространства имен в класс настраиваемых параметров.
+
+```python
+from marshmallow import Schema, SchemaOpts
+
+class NamespaceOpts(SchemaOpts):
+    """То же, что и параметры класса Meta по умолчанию,
+    но добавлены параметры «name» и «plural_name» для оболочки.
+    """
+
+    def __init__(self, meta, **kwargs):
+        SchemaOpts.__init__(self, meta, **kwargs)
+        self.name = getattr(meta, "name", None)
+        self.plural_name = getattr(meta, "plural_name", self.name)
+```
+
+Затем мы создаем пользовательскую схему <mark style="color:red;">Schema</mark>, которая использует наш класс параметров.
+
+```python
+class NamespacedSchema(Schema):
+    OPTIONS_CLASS = NamespaceOpts
+
+    @pre_load(pass_many=True)
+    def unwrap_envelope(self, data, many, **kwargs):
+        key = self.opts.plural_name if many else self.opts.name
+        return data[key]
+
+    @post_dump(pass_many=True)
+    def wrap_with_envelope(self, data, many, **kwargs):
+        key = self.opts.plural_name if many else self.opts.name
+        return {key: data}
+```
+
+Схемы наших приложений теперь могут наследоваться от нашего пользовательского класса схемы.
+
+```python
+class UserSchema(NamespacedSchema):
+    name = fields.String()
+    email = fields.Email()
+
+    class Meta:
+        name = "user"
+        plural_name = "users"
+
+ser = UserSchema()
+user = User("Keith", email="keith@stones.com")
+result = ser.dump(user)
+result  # {"user": {"name": "Keith", "email": "keith@stones.com"}}
+```
+
+## Использование контекста
+
+Атрибут **context** схемы <mark style="color:red;">Schema</mark> — это хранилище общего назначения для дополнительной информации, которая может понадобиться для (де)сериализации. Его можно использовать как в методах **Schema**, так и в методах **Field**.
+
+```python
+schema = UserSchema()
+# Сделать текущий HTTP-запрос доступным для настраиваемых полей,
+# методов схемы, средств проверки схемы и т. д.
+schema.context["request"] = request
+schema.dump(user)
+```
+
+## Пользовательские сообщения об ошибках
+
+Чтобы настроить сообщения об ошибках на уровне схемы, которые используют <mark style="color:red;">load</mark> и <mark style="color:red;">loads</mark> при вызове [ValidationError](../api-marshmallow/isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), переопределите переменную класса <mark style="color:red;">error\_messages</mark>:
+
+```python
+class MySchema(Schema):
+    error_messages = {
+        "unknown": "Custom unknown field error message.",
+        "type": "Custom invalid type error message.",
+    }
+```
+
+Значения по умолчанию для сообщений об ошибках на уровне поля можно установить в Field.default\_error\_messages.
