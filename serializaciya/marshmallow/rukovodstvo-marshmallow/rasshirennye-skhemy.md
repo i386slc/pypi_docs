@@ -434,4 +434,17 @@ class MySchema(Schema):
     }
 ```
 
-Значения по умолчанию для сообщений об ошибках на уровне поля можно установить в Field.default\_error\_messages.
+Значения по умолчанию для сообщений об ошибках на уровне поля можно установить в [Field.default\_error\_messages](../api-marshmallow/polya-fields.md#default\_error\_messages-null-field-may-not-be-null.-required-missing-data-for-required-field.-validat).
+
+```python
+from marshmallow import Schema, fields
+
+fields.Field.default_error_messages["required"] = "You missed something!"
+
+class ArtistSchema(Schema):
+    name = fields.Str(required=True)
+    label = fields.Str(required=True, error_messages={"required": "Label missing."})
+
+print(ArtistSchema().validate({}))
+# {'label': ['Label missing.'], 'name': ['You missed something!']}
+```
