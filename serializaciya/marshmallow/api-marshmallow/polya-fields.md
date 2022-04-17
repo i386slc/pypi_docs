@@ -6,6 +6,8 @@
 
 ### _class_ marshmallow.fields.Field(_\*, load\_default: typing.Any = \<marshmallow.missing>, missing: typing.Any = \<marshmallow.missing>, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, data\_key: str | None = None, attribute: str | None = None, validate: None | (typing.Callable\[\[typing.Any], typing.Any] | typing.Iterable\[typing.Callable\[\[typing.Any], typing.Any]]) = None, required: bool = False, allow\_none: bool | None = None, load\_only: bool = False, dump\_only: bool = False, error\_messages: dict\[str, str] | None = None, metadata: typing.Mapping\[str, typing.Any] | None = None, \*\*additional\_metadata_)
 
+#### default\_error\_messages _= {'null': 'Field may not be null.', 'required': 'Missing data for required field.', 'validator\_failed': 'Invalid value.'}_
+
 #### \_deserialize(_value: Any_, _attr: str | None_, _data: Mapping\[str, Any] | None_, _\*\*kwargs_)
 
 #### \_serialize(_value: Any_, _attr: str_, _obj: Any_, _\*\*kwargs_)
