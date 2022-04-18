@@ -149,19 +149,145 @@ class Meta:
 
 ### _property_ dict\_class: type
 
-### dump(_obj: Any_, _\*_, _many: bool | None = None_)
+### dump()
 
-### dumps(_obj: Any_, _\*args_, _many: bool | None = None_, _\*\*kwargs_)
+#### dump(_obj: Any_, _\*_, _many: bool | None = None_)
 
-### error\_messages_: Dict\[str, str] = {}_
+Сериализует объект в собственные типы данных Python в соответствии с полями этой схемы.
 
-### get\_attribute(_obj: Any_, _attr: str_, _default: Any_)
+#### Параметры:
 
-### handle\_error(_error: marshmallow.exceptions.ValidationError_, _data: Any_, _\*_, _many: bool_, _\*\*kwargs_)
+* **obj** - Объект для сериализации.
+* **many** - Следует ли сериализовать **obj** как коллекцию. Если `None`, используется значение для `self.many`.
 
-### load(_data: Mapping\[str, Any] | Iterable\[Mapping\[str, Any]]_, _\*_, _many: bool | None = None_, _partial: bool | types.StrSequenceOrSet | None = None_, _unknown: str | None = None_)
+#### Возвращает:
 
-### loads(_json\_data: str_, _\*_, _many: bool | None = None_, _partial: bool | types.StrSequenceOrSet | None = None_, _unknown: str | None = None_, _\*\*kwargs_)
+* Сериализованные данные
+
+_Новое в версии 1.0.0_.
+
+_Изменено в версии 3.0.0b7_: этот метод возвращает сериализованные данные, а не дубликат `(data, errors)`. Ошибка [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) возникает, если **obj** недействителен.
+
+_Изменено в версии 3.0.0rc9_: проверка больше не происходит при сериализации.
+
+### dump\_fields()
+
+#### dump\_fields_: Dict\[str, marshmallow.fields.Field]_
+
+### dumps()
+
+#### dumps(_obj: Any_, _\*args_, _many: bool | None = None_, _\*\*kwargs_)
+
+То же, что и [dump()](./#dump), за исключением того, что возвращает строку в формате **JSON**.
+
+#### Параметры:
+
+* **obj** - Объект для сериализации.
+* **many** - Следует ли сериализовать **obj** как коллекцию. Если `None`, используется значение для `self.many`.
+
+#### Возвращает:
+
+* Сериализованные данные
+
+_Новое в версии 1.0.0_.
+
+_Изменено в версии 3.0.0b7_: этот метод возвращает сериализованные данные, а не дубликат `(data, errors)`. Ошибка [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) возникает, если **obj** недействителен.
+
+_Изменено в версии 3.0.0rc9_: проверка больше не происходит при сериализации.
+
+### error\_messages
+
+#### error\_messages_: Dict\[str, str] = {}_
+
+Переопределения для сообщений об ошибках на уровне схемы по умолчанию
+
+### _fields_
+
+#### fields_: Dict\[str, marshmallow.fields.Field]_
+
+Сопоставление словаря **field\_names** -> Объекты поля __ **Field**
+
+### classmethod from\_dict()
+
+#### _classmethod_ from\_dict(_fields: dict\[str, ma\_fields.Field | type]_, _\*_, _name: str = 'GeneratedSchema'_) → type
+
+Создает класс [Schema](./#class-marshmallow.schema) с учетом словаря полей.
+
+```python
+from marshmallow import Schema, fields
+
+PersonSchema = Schema.from_dict({"name": fields.Str()})
+print(PersonSchema().load({"name": "David"}))  # => {'name': 'David'}
+```
+
+Сгенерированные схемы не добавляются в реестр классов, и поэтому на них нельзя ссылаться по имени во вложенных полях.
+
+#### Параметры:
+
+* **fields (dict)** - Словарь, сопоставляющий имена полей с экземплярами полей.
+* **name (str)** - Необязательное имя класса, которое будет отображаться в представлении **repr** класса.
+
+_Новое в версии 3.0.0_.
+
+### get\_attribute()
+
+#### get\_attribute(_obj: Any_, _attr: str_, _default: Any_)
+
+Определяет, как извлекать значения из объекта для сериализации.
+
+_Новое в версии 2.0.0_.
+
+_Изменено в версии 3.0.0a1_: Изменено положение **obj** и **attr**.
+
+### handle\_error()
+
+#### handle\_error(_error: marshmallow.exceptions.ValidationError_, _data: Any_, _\*_, _many: bool_, _\*\*kwargs_)
+
+Пользовательская функция обработчика ошибок для схемы.
+
+#### Параметры:
+
+* **error** - Ошибка проверки [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), возникшая во время (де)сериализации.
+* **data** - Исходные входные данные
+* **many** - Значение **many** при дампе или загрузке.
+* **partial** - Значение **partial** при загрузке.
+
+_Новое в версии 2.0.0_.
+
+_Изменено в версии 3.0.0rc9_: получает **many** и **partial** (при десериализации) аргументы ключевого слова.
+
+### load()
+
+#### load(_data: Mapping\[str, Any] | Iterable\[Mapping\[str, Any]]_, _\*_, _many: bool | None = None_, _partial: bool | types.StrSequenceOrSet | None = None_, _unknown: str | None = None_)
+
+Десериализует структуру данных в объект, определенный полями этой схемы.
+
+#### Параметры:
+
+* **data** - Данные для десериализации.
+* **many** - Следует ли десериализовать данные как коллекцию. Если `None`, используется значение для `self.many`.
+* **partial** - Следует ли игнорировать отсутствующие поля и не требовать объявления каких-либо полей. Также распространяется на вложенные поля. Если его значение является итерируемым, будут игнорироваться только отсутствующие поля, перечисленные в этом итерируемом. Используйте точечные разделители для указания вложенных полей.
+* **unknown** - Следует ли исключить, включить или вызвать ошибку для неизвестных полей в данных. Используйте **EXCLUDE**, **INCLUDE** или **RAISE**. Если нет, используется значение для `self.unknown`.
+
+#### Возвращает:
+
+* Десериализованные данные
+
+_Новое в версии 1.0.0_.
+
+_Изменено в версии 3.0.0b7_: этот метод возвращает сериализованные данные, а не дубликат `(data, errors)`. Ошибка [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) возникает, если **obj** недействителен.
+
+### load\_fields
+
+#### load\_fields_: Dict\[str, marshmallow.fields.Field]_
+
+### loads()
+
+#### loads(_json\_data: str_, _\*_, _many: bool | None = None_, _partial: bool | types.StrSequenceOrSet | None = None_, _unknown: str | None = None_, _\*\*kwargs_)
+
+То же, что и [load()](./#load), за исключением того, что в качестве входных данных принимает строку **JSON**.
+
+#### Параметры:
 
 ### validate(_data: Mapping\[str, Any] | Iterable\[Mapping\[str, Any]]_, _\*_, _many: bool | None = None_, _partial: bool | types.StrSequenceOrSet | None = None_) → dict\[str, list\[str]]
 
