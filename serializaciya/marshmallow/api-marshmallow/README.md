@@ -80,10 +80,10 @@ _Изменено в версии 2.0.0_: **\_\_validators\_\_**, **\_\_preproce
 
 ### Классы Schema
 
-| Название       | Описание                                    |
-| -------------- | ------------------------------------------- |
-| Meta()         | Объект параметров для схемы.                |
-| OPTIONS\_CLASS | Псевдоним для marshmallow.schema.SchemaOpts |
+| Название                       | Описание                                    |
+| ------------------------------ | ------------------------------------------- |
+| [Meta()](./#klass-meta)        | Объект параметров для схемы.                |
+| [OPTIONS\_CLASS](./#undefined) | Псевдоним для marshmallow.schema.SchemaOpts |
 
 ### Атрибуты Schema
 
@@ -131,13 +131,23 @@ class Meta:
 * **dateformat** - Формат по умолчанию для полей <mark style="color:red;">Date</mark>.
 * **datetimeformat** - Формат по умолчанию для полей <mark style="color:red;">DateTime</mark>
 * **timeformat** - Формат по умолчанию для полей <mark style="color:red;">Time</mark>
-* **render\_module** -&#x20;
-* **ordered** -&#x20;
-* **index\_errors** -&#x20;
-* **load\_only** -&#x20;
-* **dump\_only** -&#x20;
-* **unknown** -&#x20;
-* **register** -&#x20;
+* **render\_module** - Модуль для <mark style="color:red;">loads</mark> и <mark style="color:red;">dumps</mark>. По умолчанию используется [json](https://python.readthedocs.io/en/latest/library/json.html#module-json) из стандартной библиотеки.
+* **ordered** - Если `True`, упорядочить выходные данные сериализации в соответствии с порядком, в котором были объявлены поля. Вывод <mark style="color:red;">Schema.dump</mark> будет [collections.OrderedDict](https://python.readthedocs.io/en/latest/library/collections.html#collections.OrderedDict).
+* **index\_errors** - Если значение равно `True`, словари ошибок будут включать в себя индекс недопустимых элементов в коллекции.
+* **load\_only** - Кортеж или список полей, которые необходимо исключить из сериализованных результатов.
+* **dump\_only** - Кортеж или список полей для исключения из десериализации
+* **unknown** - Следует ли исключить, включить или вызвать ошибку для неизвестных полей в данных. Используйте **EXCLUDE**, **INCLUDE** или **RAISE**.
+* **register** - Регистрировать ли схему во внутреннем реестре классов **marshmallow**. Должно быть `True`, если вы собираетесь обращаться к этой схеме по имени класса во вложенных полях. Установите значение `False` только в том случае, если использование памяти критично. По умолчанию `True`.
+
+### OPTIONS\_CLASS
+
+Псевдоним для <mark style="color:red;">marshmallow.schema.SchemaOpts</mark>.
+
+### TYPE\_MAPPING
+
+#### TYPE\_MAPPING_: Dict\[type, Type\[marshmallow.fields.Field]] = {\<class 'str'>: \<class 'marshmallow.fields.String'>, \<class 'bytes'>: \<class 'marshmallow.fields.String'>, \<class 'datetime.datetime'>: \<class 'marshmallow.fields.DateTime'>, \<class 'float'>: \<class 'marshmallow.fields.Float'>, \<class 'bool'>: \<class 'marshmallow.fields.Boolean'>, \<class 'tuple'>: \<class 'marshmallow.fields.Raw'>, \<class 'list'>: \<class 'marshmallow.fields.Raw'>, \<class 'set'>: \<class 'marshmallow.fields.Raw'>, \<class 'int'>: \<class 'marshmallow.fields.Integer'>, \<class 'uuid.UUID'>: \<class 'marshmallow.fields.UUID'>, \<class 'datetime.time'>: \<class 'marshmallow.fields.Time'>, \<class 'datetime.date'>: \<class 'marshmallow.fields.Date'>, \<class 'datetime.timedelta'>: \<class 'marshmallow.fields.TimeDelta'>, \<class 'decimal.Decimal'>: \<class 'marshmallow.fields.Decimal'>}_
+
+### _property_ dict\_class: type
 
 ### dump(_obj: Any_, _\*_, _many: bool | None = None_)
 
