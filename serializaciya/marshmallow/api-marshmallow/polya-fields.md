@@ -4,24 +4,99 @@
 
 ## Классы:
 
-| Класс                                                | Описание |
-| ---------------------------------------------------- | -------- |
-| AwareDateTime(\[format, default\_timezone])          |          |
-| Bool                                                 |          |
-| Boolean(\*\[, truthy, falsy])                        |          |
-| Constant(constant, \*\*kwargs)                       |          |
-| Date(\[format])                                      |          |
-| DateTime(\[format])                                  |          |
-| Decimal(\[places, rounding, allow\_nan, as\_string]) |          |
-| Dict(\[keys, values])                                |          |
-| Email(\*args, \*\*kwargs)                            |          |
-|                                                      |          |
-|                                                      |          |
-|                                                      |          |
-|                                                      |          |
-|                                                      |          |
-|                                                      |          |
-|                                                      |          |
+| Класс                                                | Описание                                                                                                                                                              |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AwareDateTime(\[format, default\_timezone])          | Отформатированная осведомленная строка даты и времени.                                                                                                                |
+| Bool                                                 | псевдоним <mark style="color:red;">marshmallow.fields.Boolean</mark>                                                                                                  |
+| Boolean(\*\[, truthy, falsy])                        | Логическое поле                                                                                                                                                       |
+| Constant(constant, \*\*kwargs)                       | Поле, которое (де)сериализуется в предустановленную константу.                                                                                                        |
+| Date(\[format])                                      | Строка даты в формате ISO8601.                                                                                                                                        |
+| DateTime(\[format])                                  | Отформатированная строка даты и времени.                                                                                                                              |
+| Decimal(\[places, rounding, allow\_nan, as\_string]) | Поле, которое (де)сериализуется в тип Python **decimal.Decimal**.                                                                                                     |
+| Dict(\[keys, values])                                | Поле словаря                                                                                                                                                          |
+| Email(\*args, \*\*kwargs)                            | Поле электронной почты                                                                                                                                                |
+| Field(\*, load\_default, missing, ...)               | Основное поле, из которого должны расширяться другие поля                                                                                                             |
+| Float(\*\[, allow\_nan, as\_string])                 | **Double** как строка двойной точности IEEE-754                                                                                                                       |
+| Function(\[serialize, deserialize])                  | Поле, принимающее значение, возвращенное функцией                                                                                                                     |
+| IP(\*args\[, exploded])                              | Поле IP-адреса                                                                                                                                                        |
+| IPInterface(\*args\[, exploded])                     | Поле IP-интерфейса                                                                                                                                                    |
+| IPv4(\*args\[, exploded])                            | Поле адреса IPv4                                                                                                                                                      |
+| IPv4Interface(\*args\[, exploded])                   | Поле сетевого интерфейса IPv4                                                                                                                                         |
+| IPv6(\*args\[, exploded])                            | Поле адреса IPv6                                                                                                                                                      |
+| IPv6Interface(\*args\[, exploded])                   | Поле сетевого интерфейса IPv6                                                                                                                                         |
+| Int                                                  | псевдоним <mark style="color:red;">marshmallow.fields.Intege</mark>r                                                                                                  |
+| Integer(\*\[, strict])                               | Целочисленное поле                                                                                                                                                    |
+| List(cls\_or\_instance, \*\*kwargs)                  | Поле списка, составленное из другого класса или экземпляра <mark style="color:red;">Field</mark>                                                                      |
+| Mapping(\[keys, values])                             | Абстрактный класс для объектов с парами ключ-значение                                                                                                                 |
+| Method(\[serialize, deserialize])                    | Поле, которое принимает значение, возвращаемое методом схемы                                                                                                          |
+| NaiveDateTime(\[format, timezone])                   | Отформатированная наивная строка даты и времени.                                                                                                                      |
+| Nested(nested, ...)                                  | Позволяет вложить [Schema](skhema-schema.md#class-marshmallow.schema) внутрь поля.                                                                                    |
+| Number(\*\[, as\_string])                            | Базовый класс для числовых полей.                                                                                                                                     |
+| Pluck(nested, field\_name, \*\*kwargs)               | Позволяет заменить вложенные данные одним из полей данных.                                                                                                            |
+| Raw(\*, load\_default, missing, dump\_default, ...)  | Поле, к которому не применяется форматирование.                                                                                                                       |
+| Str                                                  | псевдоним <mark style="color:red;">marshmallow.fields.String</mark>                                                                                                   |
+| String(\*, load\_default, missing, ...)              | Строковое поле.                                                                                                                                                       |
+| Time(\[format])                                      | Отформатированная строка времени.                                                                                                                                     |
+| TimeDelta(\[precision])                              | Поле, которое (де)сериализует объект [datetime.timedelta](https://python.readthedocs.io/en/latest/library/datetime.html#datetime.timedelta) в целое число и наоборот. |
+| Tuple(tuple\_fields, \*args, \*\*kwargs)             | Поле кортежа, состоящее из фиксированного числа других классов или экземпляров Field                                                                                  |
+| URL                                                  | псевдоним <mark style="color:red;">marshmallow.fields.Url</mark>                                                                                                      |
+| UUID(\*, load\_default, missing, dump\_default, ...) | Поле UUID.                                                                                                                                                            |
+| Url(\*\[, relative, schemes, require\_tld])          | Поле URL.                                                                                                                                                             |
+
+## AwareDateTime
+
+#### _class_ marshmallow.fields.AwareDateTime(_format: str | None = None_, _\*_, _default\_timezone: dt.tzinfo | None = None_, _\*\*kwargs_)
+
+Отформатированная "осведомленная" строка даты и времени.
+
+#### Параметры:
+
+* **format** - смотри <mark style="color:red;">DateTime</mark>
+* **default\_timezone** - Используется при десериализации. Если `None`, наивные даты и время отклоняются. Если не `None`, в этом часовом поясе устанавливаются наивные значения даты и времени.
+* **kwargs** - Те же аргументы ключевого слова, которые получает <mark style="color:red;">Field</mark>.
+
+_Новое в версии 3.0.0rc9_.
+
+#### Методы:
+
+| Метод                                        | Описание                  |
+| -------------------------------------------- | ------------------------- |
+| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение. |
+
+### \_deserialize()
+
+#### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_)
+
+#### Параметры:
+
+* **value** - Значение для десериализации
+* **attr** - Атрибут/ключ в данных для десериализации
+* **data** - Необработанные входные данные передаются в `Schema.load`.
+* **kwargs** - Аргументы ключевого слова, специфичные для <mark style="color:red;">Field</mark>.
+
+**Поднимает**: [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) - В случае сбоя форматирования или проверки.
+
+**Возвращает**: Десериализованное значение.
+
+_Изменено в версии 2.0.0_: Добавлены параметры **attr** и **data**.
+
+_Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в сигнатуру.
+
+## Bool
+
+Псевдоним [marshmallow.fields.Boolean](polya-fields.md#undefined).
+
+## Boolean
+
+#### _class_ marshmallow.fields.Boolean(_\*_, _truthy: set | None = None_, _falsy: set | None = None_, _\*\*kwargs_)
+
+Логическое поле.
+
+#### Параметры:
+
+* **truthy** - Значения, которые будут (де)сериализованы в **True**. Если набор пуст, любое неложное значение будет десериализовано до **True**. Если нет, будет использоваться <mark style="color:red;">marshmallow.fields.Boolean.truthy</mark>.
+* **falsy** - Значения, которые будут (де)сериализованы в **False**. Если нет, будет использоваться <mark style="color:red;">marshmallow.fields.Boolean.falsy</mark>.
+* **kwargs** - Те же аргументы ключевого слова, которые получает <mark style="color:red;">Field</mark>.
 
 ### _class_ marshmallow.fields.Email(_\*args_, _\*\*kwargs_)
 
