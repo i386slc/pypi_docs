@@ -1,5 +1,28 @@
 # Поля Fields
 
+Классы полей для различных типов данных.
+
+## Классы:
+
+| Класс                                                | Описание |
+| ---------------------------------------------------- | -------- |
+| AwareDateTime(\[format, default\_timezone])          |          |
+| Bool                                                 |          |
+| Boolean(\*\[, truthy, falsy])                        |          |
+| Constant(constant, \*\*kwargs)                       |          |
+| Date(\[format])                                      |          |
+| DateTime(\[format])                                  |          |
+| Decimal(\[places, rounding, allow\_nan, as\_string]) |          |
+| Dict(\[keys, values])                                |          |
+| Email(\*args, \*\*kwargs)                            |          |
+|                                                      |          |
+|                                                      |          |
+|                                                      |          |
+|                                                      |          |
+|                                                      |          |
+|                                                      |          |
+|                                                      |          |
+
 ### _class_ marshmallow.fields.Email(_\*args_, _\*\*kwargs_)
 
 ### _class_ marshmallow.fields.DateTime(_format: str | None = None_, _\*\*kwargs_)
