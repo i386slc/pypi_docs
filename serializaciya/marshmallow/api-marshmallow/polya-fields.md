@@ -189,9 +189,242 @@ class TitleCase(Field):
 
 _Новое в версии 2.0.0_.
 
-### _class_ marshmallow.fields.Email(_\*args_, _\*\*kwargs_)
+#### Методы:
 
-### _class_ marshmallow.fields.DateTime(_format: str | None = None_, _\*\*kwargs_)
+| Название                                     | Описание                                           |
+| -------------------------------------------- | -------------------------------------------------- |
+| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                          |
+| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python. |
+
+### \_deserialize()
+
+#### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_)
+
+Десериализовать значение **value**. Конкретные классы <mark style="color:red;">Field</mark> должны реализовывать этот метод.
+
+#### Параметры:
+
+* **value** - Значение для десериализации
+* **attr** - Атрибут/ключ в данных для десериализации
+* **data** - Необработанные входные данные передаются в `Schema.load`.
+* **kwargs** - Аргументы ключевого слова, специфичные для <mark style="color:red;">Field</mark>.
+
+**Поднимает**: [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) - В случае сбоя форматирования или проверки.
+
+**Возвращает**: Десериализованное значение.
+
+_Изменено в версии 2.0.0_: Добавлены параметры **attr** и **data**.
+
+_Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в сигнатуру.
+
+### \_serialize()
+
+#### \_serialize(_value_, _attr_, _obj_, _\*\*kwargs_)
+
+Сериализует значение **value** в базовый тип данных Python. **Noop** по умолчанию. Конкретные классы <mark style="color:red;">Field</mark> должны реализовывать этот метод.
+
+Пример:
+
+```python
+class TitleCase(Field):
+    def _serialize(self, value, attr, obj, **kwargs):
+        if not value:
+            return ''
+        return str(value).title()
+```
+
+#### Параметры:
+
+* **value** - Значение, которое нужно сериализовать
+* **attr** (_str_) - Атрибут или ключ объекта, который нужно сериализовать.
+* **obj** (_object_) - Объект, из которого было извлечено значение.
+* **kwargs** (_dict_) - Аргументы ключевого слова, специфичные для <mark style="color:red;">Field</mark>.
+
+**Возвращает**: Сериализованное значение.
+
+## Date
+
+#### _class_ marshmallow.fields.Date(_format: str | None = None_, _\*\*kwargs_)
+
+Строка даты в формате ISO8601.
+
+#### Параметры:
+
+* **format** - Либо "iso" (для ISO8601), либо строка формата даты. Если `None`, по умолчанию используется «iso».
+* **kwargs** - Те же аргументы ключевого слова, которые получает <mark style="color:red;">Field</mark>.
+
+#### Атрибуты:
+
+| Название                     | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+### default\_error\_messages
+
+#### default\_error\_messages _= {'format': '"{input}" cannot be formatted as a date.', 'invalid': 'Not a valid date.'}_
+
+Сообщения об ошибках по умолчанию.
+
+## DateTime
+
+#### _class_ marshmallow.fields.DateTime(_format: str | None = None_, _\*\*kwargs_)
+
+Отформатированная строка даты и времени.
+
+Пример: `'2014-12-22T03:12:58.019077+00:00'`
+
+#### Параметры:
+
+* **format** - Либо "rfc" (для RFC822), "iso" (для ISO8601), либо строка формата даты. Если нет, по умолчанию используется «iso».
+* **kwargs** - Те же аргументы ключевого слова, которые получает <mark style="color:red;">Field</mark>.
+
+_Изменено в версии 3.0.0rc9_: не изменяет информацию о часовом поясе при (де)сериализации.
+
+#### Методы:
+
+| Название                                     | Описание                                                 |
+| -------------------------------------------- | -------------------------------------------------------- |
+| **\_bind\_to\_schema**(field\_name, schema)  | Поле обновления со значениями из его родительской схемы. |
+| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                                |
+| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python.       |
+
+#### Атрибуты:
+
+| Название                     | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+### \_bind\_to\_schema()
+
+#### \_bind\_to\_schema(_field\_name_, _schema_)
+
+Поле обновления со значениями из его родительской схемы. Вызывается `Schema._bind_field`.
+
+#### Параметры:
+
+* **field\_name** (str) - Имя поля задано в схеме.
+* **schema** (Schema | Field) - Родительский объект.
+
+### \_deserialize()
+
+#### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_)
+
+Десериализовать значение **value**. Конкретные классы <mark style="color:red;">Field</mark> должны реализовывать этот метод.
+
+#### Параметры:
+
+* **value** - Значение для десериализации
+* **attr** - Атрибут/ключ в данных для десериализации
+* **data** - Необработанные входные данные передаются в `Schema.load`.
+* **kwargs** - Аргументы ключевого слова, специфичные для <mark style="color:red;">Field</mark>.
+
+**Поднимает**: [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) - В случае сбоя форматирования или проверки.
+
+**Возвращает**: Десериализованное значение.
+
+_Изменено в версии 2.0.0_: Добавлены параметры **attr** и **data**.
+
+_Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в сигнатуру.
+
+### \_serialize()
+
+#### \_serialize(_value_, _attr_, _obj_, _\*\*kwargs_)
+
+Сериализует значение **value** в базовый тип данных Python. **Noop** по умолчанию. Конкретные классы <mark style="color:red;">Field</mark> должны реализовывать этот метод.
+
+Пример:
+
+```python
+class TitleCase(Field):
+    def _serialize(self, value, attr, obj, **kwargs):
+        if not value:
+            return ''
+        return str(value).title()
+```
+
+#### Параметры:
+
+* **value** - Значение, которое нужно сериализовать
+* **attr** (_str_) - Атрибут или ключ объекта, который нужно сериализовать.
+* **obj** (_object_) - Объект, из которого было извлечено значение.
+* **kwargs** (_dict_) - Аргументы ключевого слова, специфичные для <mark style="color:red;">Field</mark>.
+
+**Возвращает**: Сериализованное значение
+
+### default\_error\_messages
+
+#### default\_error\_messages _= {'format': '"{input}" cannot be formatted as a {obj\_type}.', 'invalid': 'Not a valid {obj\_type}.', 'invalid\_awareness': 'Not a valid {awareness} {obj\_type}.'}_
+
+Сообщения об ошибках по умолчанию.
+
+### Decimal
+
+#### _class_ marshmallow.fields.Decimal(_places: int | None = None_, _rounding: str | None = None_, _\*_, _allow\_nan: bool = False_, _as\_string: bool = False_, _\*\*kwargs_)
+
+Поле, которое (де)сериализуется в тип Python `decimal.Decimal`. Его безопасно использовать при работе с денежными значениями, процентами, отношениями или другими числами, где точность имеет решающее значение.
+
+{% hint style="info" %}
+Это поле сериализуется в объект [decimal.Decimal](https://python.readthedocs.io/en/latest/library/decimal.html#decimal.Decimal) по умолчанию. Если вам нужно отобразить ваши данные в формате **JSON**, имейте в виду, что модуль [json](https://python.readthedocs.io/en/latest/library/json.html#module-json) из стандартной библиотеки не кодирует [decimal.Decimal](https://python.readthedocs.io/en/latest/library/decimal.html#decimal.Decimal). Поэтому вы должны использовать библиотеку **JSON**, которая может обрабатывать десятичные числа, например **simplejson**, или сериализовать в строку, передав `as_string=True`.
+{% endhint %}
+
+{% hint style="info" %}
+Если в это поле для десериализации передается значение [float](https://python.readthedocs.io/en/latest/library/functions.html#float) **JSON**, оно сначала будет приведено к соответствующему строковому значению [string](https://python.readthedocs.io/en/latest/library/string.html#module-string), а затем десериализовано в объект [decimal.Decimal](https://python.readthedocs.io/en/latest/library/decimal.html#decimal.Decimal). Реализация по умолчанию **\_\_str\_\_** встроенного типа с плавающей запятой [float](https://python.readthedocs.io/en/latest/library/functions.html#float) Python может применять деструктивное преобразование к своим входным данным, и поэтому на нее нельзя полагаться для сохранения точности. Чтобы избежать этого, вы можете вместо этого передать строку [string](https://python.readthedocs.io/en/latest/library/string.html#module-string) JSON для прямой десериализации.
+{% endhint %}
+
+#### Параметры:
+
+* **places** - До скольких знаков после запятой квантовать значение. Если `None`, не квантует значение.
+* **rounding** - Как округлить значение при квантовании, например [decimal.ROUND\_UP](https://python.readthedocs.io/en/latest/library/decimal.html#decimal.ROUND\_UP). Если `None`, использует значение округления из контекста текущего потока.
+* **allow\_nan** - Если `True`, разрешены **NaN**, **Infinity** и **-Infinity**, даже если они недопустимы в соответствии со спецификацией **JSON**.
+* **as\_string** - Если `True`, сериализовать в строку вместо типа Python [decimal.Decimal](https://python.readthedocs.io/en/latest/library/decimal.html#decimal.Decimal).
+* **kwargs** - Те же аргументы ключевого слова, которые получает <mark style="color:red;">Number</mark>.
+
+_Новое в версии 1.2.0_.
+
+#### Методы:
+
+| Название             | Описание                                                                                                                                                                                            |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \_format\_num(value) | Возвращает числовое значение для значения, учитывая <mark style="color:red;">num\_type</mark> этого поля.                                                                                           |
+| \_validated(value)   | Форматирует значение или вызывает [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), если возникнет ошибка. |
+
+#### Атрибуты:
+
+| Название                     | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+#### Классы:
+
+| Название  | Описание                                                                                                  |
+| --------- | --------------------------------------------------------------------------------------------------------- |
+| num\_type | псевдоним [decimal.Decimal](https://python.readthedocs.io/en/latest/library/decimal.html#decimal.Decimal) |
+
+### \_format\_num()
+
+#### \_format\_num(_value_)
+
+Возвращает числовое значение для значения, учитывая <mark style="color:red;">num\_type</mark> этого поля.
+
+### \_validated()
+
+#### \_validated(_value_)
+
+Форматирует значение или вызывает [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), если возникнет ошибка.
+
+### default\_error\_messages
+
+#### default\_error\_messages _= {'special': 'Special numeric values (nan or infinity) are not permitted.'}_
+
+Сообщения об ошибках по умолчанию.
+
+### num\_type
+
+Псевдоним [decimal.Decimal](https://python.readthedocs.io/en/latest/library/decimal.html#decimal.Decimal)
+
+#### Методы num\_type:
+
+### _class_ marshmallow.fields.Email(_\*args_, _\*\*kwargs_)
 
 ### _class_ marshmallow.fields.Field(_\*, load\_default: typing.Any = \<marshmallow.missing>, missing: typing.Any = \<marshmallow.missing>, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, data\_key: str | None = None, attribute: str | None = None, validate: None | (typing.Callable\[\[typing.Any], typing.Any] | typing.Iterable\[typing.Callable\[\[typing.Any], typing.Any]]) = None, required: bool = False, allow\_none: bool | None = None, load\_only: bool = False, dump\_only: bool = False, error\_messages: dict\[str, str] | None = None, metadata: typing.Mapping\[str, typing.Any] | None = None, \*\*additional\_metadata_)
 
