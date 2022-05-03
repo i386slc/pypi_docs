@@ -656,7 +656,142 @@ class TitleCase(Field):
 
 ### \_validate()
 
-### _class_ marshmallow.fields.Function(_serialize: None | Callable\[\[Any], Any] | Callable\[\[Any, dict], Any] = None_, _deserialize: None | Callable\[\[Any], Any] | Callable\[\[Any, dict], Any] = None_, _\*\*kwargs_)
+#### \_validate(_value_)
+
+Выполняет проверку значения **value**. Поднимает **ValidationError**, если проверка не прошла успешно.
+
+### \_validate\_missing()
+
+#### \_validate\_missing(_value_)
+
+Проверяет отсутствующие значения. Поднимает **ValidationError**, если значение следует считать отсутствующим.
+
+### _property_ context
+
+Словарь контекста для родительской схемы.
+
+### default\_error\_messages
+
+#### default\_error\_messages _= {'null': 'Field may not be null.', 'required': 'Missing data for required field.', 'validator\_failed': 'Invalid value.'}_
+
+Сообщения об ошибках по умолчанию для различных типов ошибок. Ключи в этом словаре передаются в <mark style="color:red;">Field.make\_error</mark>. Значения представляют собой сообщения об ошибках, передаваемые в [marshmallow.exceptions.ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema).
+
+### deserialize()
+
+#### deserialize(_value: Any_, _attr: str | None = None_, _data: Mapping\[str, Any] | None = None_, _\*\*kwargs_)
+
+Десериализует значение **value**.
+
+#### Параметры:
+
+* **value** - Значение для десериализации.
+* **attr** - Атрибут/ключ данных для десериализации.
+* **data** - Необработанные входные данные передаются в Schema.load.
+* **kwargs** - Аргументы ключевого слова для конкретных полей.
+
+**Поднимает**: [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) - Если передано недопустимое значение или если требуемое значение отсутствует.
+
+### fail()
+
+#### fail(_key: str_, _\*\*kwargs_)
+
+Вспомогательный метод, вызывающий **ValidationError** с сообщением об ошибке из `self.error_messages`.
+
+_**Устарело**, начиная с версии 3.0.0_: вместо этого используйте <mark style="color:red;">make\_error</mark>.
+
+### get\_value()
+
+#### get\_value(_obj_, _attr_, _accessor=None_, _default=\<marshmallow.missing>_)
+
+Возвращает значение для данного ключа из объекта.
+
+#### Параметры:
+
+* **obj** (object) - Объект, из которого нужно получить значение.
+* **attr** (str) - Атрибут/ключ в объекте **obj**, из которого нужно получить значение.
+* **accessor** (callable) - Вызываемый объект, используемый для получения значения **attr** из объекта **obj**. По умолчанию используется <mark style="color:red;">marshmallow.utils.get\_value</mark>.
+
+### make\_error()
+
+#### make\_error(_key: str_, _\*\*kwargs_)→ marshmallow.exceptions.ValidationError
+
+Вспомогательный метод для создания **ValidationError** с сообщением об ошибке из `self.error_messages`.
+
+### serialize()
+
+#### serialize(_attr: str_, _obj: Any_, _accessor: Callable\[\[Any, str, Any], Any] | None = None_, _\*\*kwargs_)
+
+Извлекает значение для данного ключа из объекта, применяет форматирование поля и возвращает результат.
+
+#### Параметры:
+
+* **attr** - Атрибут/ключ, который нужно получить от объекта.
+* **obj** - Объект для доступа к атрибуту/ключу.
+* **accessor** - Функция, используемая для доступа к значениям из **obj**.
+* **kwargs** - Аргументы ключевого слова для конкретных полей.
+
+## Float
+
+#### _class_ marshmallow.fields.Float(_\*_, _allow\_nan: bool = False_, _as\_string: bool = False_, _\*\*kwargs_)
+
+Число double как строка двойной точности IEEE-754.
+
+#### Параметры:
+
+* **allow\_nan** (bool) - Если `True`, разрешены **NaN**, **Infinity** и **-Infinity**, даже если они недопустимы в соответствии со спецификацией **JSON**.
+* **as\_string** (bool) - Если `True`, форматирует значение как строку.
+* **kwargs** - Те же аргументы ключевого слова, которые получает <mark style="color:red;">Number</mark>.
+
+#### Методы:
+
+| Метод              | Описание                                                                      |
+| ------------------ | ----------------------------------------------------------------------------- |
+| \_validated(value) | Форматирует значение или вызывает **ValidationError**, если возникнет ошибка. |
+
+#### Атрибуты:
+
+| Атрибут                      | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+#### Классы:
+
+| Класс     | Описание                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------- |
+| num\_type | псевдоним для [float](https://python.readthedocs.io/en/latest/library/functions.html#float) |
+
+### \_validated()
+
+#### \_validated(_value_)
+
+Форматирует значение **value** или вызывает **ValidationError**, если возникнет ошибка.
+
+### default\_error\_messages
+
+#### default\_error\_messages _= {'special': 'Special numeric values (nan or infinity) are not permitted.'}_
+
+Сообщения об ошибках по умолчанию.
+
+### num\_type
+
+Псевдоним для [float](https://python.readthedocs.io/en/latest/library/functions.html#float)
+
+| Методы num\_type     | Описание                                                                  |
+| -------------------- | ------------------------------------------------------------------------- |
+| as\_integer\_ratio() | Возвращает целочисленное отношение.                                       |
+| conjugate()          | Возвращает self, комплексное сопряжение любого числа с плавающей запятой. |
+| fromhex()            | Создает число с плавающей запятой из шестнадцатеричной строки.            |
+| hex()                | Возвращает шестнадцатеричное представление числа с плавающей запятой.     |
+| is\_integer()        | Возвратите True, если число с плавающей запятой является целым числом.    |
+
+| Атрибуты num\_type | Описание                                |
+| ------------------ | --------------------------------------- |
+| imag               | мнимая часть комплексного числа         |
+| real               | действительная часть комплексного числа |
+
+## Function
+
+#### _class_ marshmallow.fields.Function(_serialize: None | Callable\[\[Any], Any] | Callable\[\[Any, dict], Any] = None_, _deserialize: None | Callable\[\[Any], Any] | Callable\[\[Any, dict], Any] = None_, _\*\*kwargs_)
 
 ### _class_ marshmallow.fields.List(_cls\_or\_instance: Field | type_, _\*\*kwargs_)
 
