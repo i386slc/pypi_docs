@@ -424,9 +424,126 @@ _Новое в версии 1.2.0_.
 
 #### Методы num\_type:
 
-### _class_ marshmallow.fields.Email(_\*args_, _\*\*kwargs_)
+| Название                                  | Описание                                                                                                                                                            |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| adjusted()                                | Возвращает скорректированный показатель степени числа.                                                                                                              |
+| as\_integer\_ratio()                      | Возвращает пару целых чисел, отношение которых точно равно исходному Decimal и с положительным знаменателем.                                                        |
+| as\_tuple()                               | Возвращает кортежное представление числа.                                                                                                                           |
+| canonical()                               | Возвращает каноническую кодировку аргумента.                                                                                                                        |
+| compare(other\[, context])                | Сравнивает себя self с другим числом other.                                                                                                                         |
+| compare\_signal(other\[, context])        | Идентичен для сравнения, за исключением того, что все сигналы NaN.                                                                                                  |
+| compare\_total(other\[, context])         | Сравнивает два операнда, используя их абстрактное представление, а не числовое значение.                                                                            |
+| compare\_total\_mag(other\[, context])    | Сравнивает два операнда, используя их абстрактное представление, а не их значение, как в **compare\_total()**, но игнорируя знак каждого операнда.                  |
+| conjugate()                               | Возвращает себя self.                                                                                                                                               |
+| copy\_abs()                               | Возвращает абсолютное значение аргумента.                                                                                                                           |
+| copy\_negate()                            | Возвращает отрицание аргумента.                                                                                                                                     |
+| copy\_sign(other\[, context])             | Возвращает копию первого операнда со знаком, совпадающим со знаком второго операнда.                                                                                |
+| exp(\[context])                           | Возвращает значение (натуральной) экспоненциальной функции e\*\*x для заданного числа.                                                                              |
+| fma(other, third\[, context])             | Слитное умножение-сложение.                                                                                                                                         |
+| from\_float()                             | Метод класса, который точно преобразует число с плавающей запятой в десятичное число.                                                                               |
+| is\_canonical()                           | Возвращает True, если аргумент является каноническим, и False в противном случае.                                                                                   |
+| is\_finite()                              | Возвращает True, если аргумент является конечным числом, и False, если аргумент бесконечен или NaN.                                                                 |
+| is\_infinite()                            | Возвращает True, если аргумент представляет собой положительную или отрицательную бесконечность, и False в противном случае.                                        |
+| is\_nan()                                 | Возвращает True, если аргумент является (тихим или сигнальным) NaN, и False в противном случае.                                                                     |
+| is\_normal(\[context])                    | Возвращает True, если аргумент является нормальным конечным числом, отличным от нуля, с скорректированным показателем степени, большим или равным Emin.             |
+| is\_qnan()                                | Возвращает True, если аргументом является тихий NaN, и False в противном случае.                                                                                    |
+| is\_signed()                              | Возвращает True, если аргумент имеет отрицательный знак, и False в противном случае.                                                                                |
+| is\_snan()                                | Возвращает True, если аргумент является сигнальным NaN, и False в противном случае.                                                                                 |
+| is\_subnormal(\[context])                 | Возвращает True, если аргумент субнормальный, и False в противном случае.                                                                                           |
+| is\_zero()                                | Возвращает True, если аргумент является (положительным или отрицательным) нулем, и False в противном случае.                                                        |
+| ln(\[context])                            | Возвращает натуральный (по основанию e) логарифм операнда.                                                                                                          |
+| log10(\[context])                         | Возвращает десятичный логарифм операнда.                                                                                                                            |
+| logb(\[context])                          | Для ненулевого числа возвращает скорректированный показатель степени операнда в виде экземпляра Decimal.                                                            |
+| logical\_and(other\[, context])           | Возвращает цифровое «и» двух (логических) операндов.                                                                                                                |
+| logical\_invert(\[context])               | Возвращает поразрядную инверсию (логического) операнда.                                                                                                             |
+| logical\_or(other\[, context])            | Возвращает цифровое «или» двух (логических) операндов.                                                                                                              |
+| logical\_xor(other\[, context])           | Возвращает поразрядное «исключающее или» двух (логических) операндов.                                                                                               |
+| max(other\[, context])                    | Максимум себя self и другого числа other.                                                                                                                           |
+| max\_mag(other\[, context])               | Аналогичен методу max(), но сравнение выполняется с использованием абсолютных значений операндов.                                                                   |
+| min(other\[, context])                    | Минимум себя self и другого числа other.                                                                                                                            |
+| min\_mag(other\[, context])               | Аналогичен методу min(), но сравнение выполняется с использованием абсолютных значений операндов.                                                                   |
+| next\_minus(\[context])                   | Возвращает наибольшее число, представленное в заданном контексте (или в текущем контексте по умолчанию, если контекст не задан), которое меньше заданного операнда. |
+| next\_plus(\[context])                    | Возвращает наименьшее число, представленное в данном контексте (или в текущем контексте по умолчанию, если контекст не задан), которое больше заданного операнда.   |
+| next\_toward(other\[, context])           | Если два операнда не равны, вернуть число, ближайшее к первому операнду в направлении второго операнда.                                                             |
+| normalize(\[context])                     | Нормализует число, удалив крайние правые конечные нули и преобразовав любой результат, равный десятичному ('0'), в десятичный ('0e0').                              |
+| number\_class(\[context])                 | Возвращает строку, описывающую класс операнда.                                                                                                                      |
+| quantize(exp\[, rounding, context])       | Возвращает значение, равное первому операнду после округления и имеющее показатель степени второго операнда.                                                        |
+| radix()                                   | Возвращает Decimal(10), основу (основание), в которой класс Decimal выполняет все свои арифметические действия.                                                     |
+| remainder\_near(other\[, context])        | Возвращает остаток от деления себя self на другое число other.                                                                                                      |
+| rotate(other\[, context])                 | Возвращает результат поворота цифр первого операнда на величину, указанную вторым операндом.                                                                        |
+| same\_quantum(other\[, context])          | Проверяет, имеют ли self и other одинаковую степень или оба являются NaN.                                                                                           |
+| scaleb(other\[, context])                 | Возвращает первый операнд с экспонентой, скорректированной вторым.                                                                                                  |
+| shift(other\[, context])                  | Возвращает результат сдвига цифр первого операнда на величину, указанную вторым операндом.                                                                          |
+| sqrt(\[context])                          | Возвращает квадратный корень аргумента с полной точностью.                                                                                                          |
+| to\_eng\_string(\[context])               | Преобразование в строку инженерного типа.                                                                                                                           |
+| to\_integral(\[rounding, context])        | Идентичен методу to\_integral\_value().                                                                                                                             |
+| to\_integral\_exact(\[rounding, context]) | Округляет до ближайшего целого числа, сигнализируя Inexact или Rounded, если округление происходит.                                                                 |
+| to\_integral\_value(\[rounding, context]) | Округляет до ближайшего целого числа, не сигнализируя о неточном или округленном значении.                                                                          |
 
-### _class_ marshmallow.fields.Field(_\*, load\_default: typing.Any = \<marshmallow.missing>, missing: typing.Any = \<marshmallow.missing>, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, data\_key: str | None = None, attribute: str | None = None, validate: None | (typing.Callable\[\[typing.Any], typing.Any] | typing.Iterable\[typing.Callable\[\[typing.Any], typing.Any]]) = None, required: bool = False, allow\_none: bool | None = None, load\_only: bool = False, dump\_only: bool = False, error\_messages: dict\[str, str] | None = None, metadata: typing.Mapping\[str, typing.Any] | None = None, \*\*additional\_metadata_)
+## Dict
+
+#### _class_ marshmallow.fields.Dict(_keys: Field | type | None = None_, _values: Field | type | None = None_, _\*\*kwargs_)
+
+Поле словаря. Поддерживает словари и подобные им объекты. Расширяет отображение с помощью dict в качестве типа отображения.
+
+Пример:
+
+```python
+numbers = fields.Dict(keys=fields.Str(), values=fields.Float())
+```
+
+#### Параметры:
+
+* kwargs - Те же аргументы ключевого слова, которые получает <mark style="color:red;">Mapping</mark>.
+
+_Новое в версии 2.1.0_.
+
+| Классы        | Описание                                                                                 |
+| ------------- | ---------------------------------------------------------------------------------------- |
+| mapping\_type | псевдоним для [dict](https://python.readthedocs.io/en/latest/library/stdtypes.html#dict) |
+
+### mapping\_type
+
+Псевдоним для [dict](https://python.readthedocs.io/en/latest/library/stdtypes.html#dict)
+
+| Методы mapping\_type        | Описание                                                                                                                                                                                                                  |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| clear()                     |                                                                                                                                                                                                                           |
+| copy()                      |                                                                                                                                                                                                                           |
+| fromkeys(\[value])          | Создает новый словарь с ключами из итерации и значениями, установленными в value.                                                                                                                                         |
+| get(key\[, default])        | Возвращает значение для ключа, если ключ есть в словаре, иначе default.                                                                                                                                                   |
+| items()                     |                                                                                                                                                                                                                           |
+| keys()                      |                                                                                                                                                                                                                           |
+| pop(k\[,d])                 | Если ключ не найден, возвращается d, если оно задано, в противном случае возникает KeyError                                                                                                                               |
+| popitem()                   | Удалить и вернуть пару (ключ, значение) в виде 2-кортежа.                                                                                                                                                                 |
+| setdefault(key\[, default]) | Вставляет ключ со значением по умолчанию, если ключ отсутствует в словаре.                                                                                                                                                |
+| update(\[E, ]\*\*F)         | Если E присутствует и имеет метод .keys(), то делает: для k в E: D\[k] = E\[k] Если E присутствует и не имеет метода .keys(), то делает: для k, v в E: D\[k] = v В любом случае за этим следует: для k в F: D\[k] = F\[k] |
+| values()                    |                                                                                                                                                                                                                           |
+
+## Email
+
+#### _class_ marshmallow.fields.Email(_\*args_, _\*\*kwargs_)
+
+Поле электронной почты.
+
+#### Параметры:
+
+* **args** - Те же позиционные аргументы, которые получает <mark style="color:red;">String</mark>.
+* **kwargs** - Те же ключевые аргументы, которые получает <mark style="color:red;">String</mark>.
+
+| Атрибут                      | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+### default\_error\_messages
+
+#### default\_error\_messages _= {'invalid': 'Not a valid email address.'}_
+
+Сообщения об ошибках по умолчанию.
+
+## Field
+
+#### _class_ marshmallow.fields.Field(_\*, load\_default: typing.Any = \<marshmallow.missing>, missing: typing.Any = \<marshmallow.missing>, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, data\_key: str | None = None, attribute: str | None = None, validate: None | (typing.Callable\[\[typing.Any], typing.Any] | typing.Iterable\[typing.Callable\[\[typing.Any], typing.Any]]) = None, required: bool = False, allow\_none: bool | None = None, load\_only: bool = False, dump\_only: bool = False, error\_messages: dict\[str, str] | None = None, metadata: typing.Mapping\[str, typing.Any] | None = None, \*\*additional\_metadata_)
 
 #### default\_error\_messages _= {'null': 'Field may not be null.', 'required': 'Missing data for required field.', 'validator\_failed': 'Invalid value.'}_
 
