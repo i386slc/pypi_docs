@@ -1063,4 +1063,139 @@ row = Tuple((fields.String(), fields.Integer(), fields.Float()))
 
 _Новое в версии 3.0.0rc4_.
 
-### marshmallow.fields.URL
+| Методы                                       | Описание                                               |
+| -------------------------------------------- | ------------------------------------------------------ |
+| **\_bind\_to\_schema**(field\_name, schema)  | Обновить поле со значениями из его родительской схемы. |
+| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                              |
+| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python.     |
+
+| Атрибут                      | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+### \_bind\_to\_schema(_field\_name_, _schema_)
+
+Обновляет поле со значениями из его родительской схемы. Вызывается `Schema._bind_field`.
+
+#### Параметры:
+
+* **field\_name** (str) - Имя поля задано в схеме.
+* **schema** (Schema | Field) - Родительский объект.
+
+### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_) → list\[Any]
+
+Десериализовать значение. Конкретные классы [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+#### Параметры:
+
+* **value** - Значение для десериализации
+* **attr** - Атрибут/ключ в данных для десериализации
+* **data** - Необработанные входные данные передаются в `Schema.load`.
+* **kwargs** - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Поднимает**: [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) - В случае сбоя форматирования или проверки.
+
+**Возвращает**: Десериализованное значение.
+
+_Изменено в версии 2.0.0_: Добавлены параметры **attr** и **data**.
+
+_Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в сигнатуру.
+
+### \_serialize(_value_, _attr_, _obj_, _\*\*kwargs_) → list\[Any] | None
+
+Сериализует **value** в базовый тип данных Python. Noop по умолчанию. Конкретные классы  [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+Пример:
+
+```python
+class TitleCase(Field):
+    def _serialize(self, value, attr, obj, **kwargs):
+        if not value:
+            return ''
+        return str(value).title()
+```
+
+#### Параметры:
+
+* **value** - Значение, которое нужно сериализовать
+* **attr** (_str_) - Атрибут или ключ объекта, который нужно сериализовать.
+* **obj** (_object_) - Объект, из которого было извлечено значение.
+* **kwargs** (_dict_) - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Возвращает**: Сериализованное значение.
+
+### default\_error\_messages _= {'invalid': 'Not a valid tuple.'}_
+
+Сообщения об ошибках по умолчанию.
+
+## URL
+
+#### marshmallow.fields.URL
+
+псевдоним marshmallow.fields.Url
+
+## UUID
+
+#### _class_ marshmallow.fields.UUID(_\*, load\_default: typing.Any = \<marshmallow.missing>, missing: typing.Any = \<marshmallow.missing>, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, data\_key: str | None = None, attribute: str | None = None, validate: None | (typing.Callable\[\[typing.Any], typing.Any] | typing.Iterable\[typing.Callable\[\[typing.Any], typing.Any]]) = None, required: bool = False, allow\_none: bool | None = None, load\_only: bool = False, dump\_only: bool = False, error\_messages: dict\[str, str] | None = None, metadata: typing.Mapping\[str, typing.Any] | None = None, \*\*additional\_metadata_)
+
+Поле UUID.
+
+| Методы                                       | Описание                                                                                                                                                                                            |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                                                                                                                                                                           |
+| \_validated(value)                           | Форматирует значение или вызывает [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), если возникнет ошибка. |
+
+| Атрибут                      | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_) → uuid.UUID | None
+
+Десериализовать значение. Конкретные классы [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+#### Параметры:
+
+* **value** - Значение для десериализации
+* **attr** - Атрибут/ключ в данных для десериализации
+* **data** - Необработанные входные данные передаются в `Schema.load`.
+* **kwargs** - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Поднимает**: [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) - В случае сбоя форматирования или проверки.
+
+**Возвращает**: Десериализованное значение.
+
+_Изменено в версии 2.0.0_: Добавлены параметры **attr** и **data**.
+
+_Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в сигнатуру.
+
+
+
+### \_validated(_value_) → uuid.UUID | None
+
+Форматирует значение или вызывает [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), если возникнет ошибка.
+
+### default\_error\_messages _= {'invalid\_uuid': 'Not a valid UUID.'}_
+
+Сообщения об ошибках по умолчанию.
+
+## Url
+
+#### _class_ marshmallow.fields.Url(_\*_, _relative: bool = False_, _schemes: types.StrSequenceOrSet | None = None_, _require\_tld: bool = True_, _\*\*kwargs_)
+
+Поле URL.
+
+#### Параметры:
+
+* **default** - Значение по умолчанию для поля, если атрибут не установлен.
+* **relative** - Разрешить ли относительные URL-адреса.
+* **require\_tld** - Следует ли отклонять имена хостов, отличные от FQDN.
+* **schemes** - Действующие схемы. По умолчанию разрешены **http**, **https**, **ftp** и **ftps**.
+* **kwargs** - Те же аргументы ключевого слова, которые получает [String](polya-fields-g-z.md#string).
+
+| Атрибут                      | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+### default\_error\_messages _= {'invalid': 'Not a valid URL.'}_
+
+Сообщения об ошибках по умолчанию.
