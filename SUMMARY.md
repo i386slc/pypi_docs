@@ -15,6 +15,7 @@
   * [API marshmallow](serializaciya/marshmallow/api-marshmallow/README.md)
     * [Схема Schema](serializaciya/marshmallow/api-marshmallow/skhema-schema.md)
     * [Поля Fields (A-F)](serializaciya/marshmallow/api-marshmallow/polya-fields-a-f.md)
+    * [Поля Fields (G-Z)](serializaciya/marshmallow/api-marshmallow/polya-fields-g-z.md)
     * [Декораторы](serializaciya/marshmallow/api-marshmallow/dekoratory.md)
     * [Валидаторы](serializaciya/marshmallow/api-marshmallow/validatory.md)
     * [Вспомогательные функции](serializaciya/marshmallow/api-marshmallow/vspomogatelnye-funkcii.md)
