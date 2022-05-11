@@ -341,6 +341,23 @@ _Новое в версии 3.8.0_.
 
 #### _class_ marshmallow.fields.List(_cls\_or\_instance: Field | type_, _\*\*kwargs_)
 
+Поле списка, составленное из другого класса [Field](polya-fields-a-f.md#field) или экземпляра.
+
+Пример:
+
+```python
+numbers = fields.List(fields.Float())
+```
+
+#### Параметры:
+
+* **cls\_or\_instance** - Класс поля или экземпляр.
+* **kwargs** - Те же аргументы ключевого слова, которые получает [Field](polya-fields-a-f.md#field).
+
+_Изменено в версии 2.0.0_: параметр **allow\_none** теперь применяется к десериализации и имеет ту же семантику, что и другие поля.
+
+_Изменено в версии 3.0.0rc9_: скалярные значения не сериализуются в списки из одного элемента.
+
 ### _class_ marshmallow.fields.Method(_serialize: str | None = None_, _deserialize: str | None = None_, _\*\*kwargs_)
 
 ### _class_ marshmallow.fields.Nested(_nested: SchemaABC | type | str | dict\[str, Field | type] | typing.Callable\[\[], SchemaABC | dict\[str, Field | type]], \*, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, only: types.StrSequenceOrSet | None = None, exclude: types.StrSequenceOrSet = (), many: bool = False, unknown: str | None = None, \*\*kwargs_)
