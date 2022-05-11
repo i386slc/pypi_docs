@@ -670,6 +670,146 @@ author = fields.Nested(UserSchema(), only=('id', 'name'))
 
 #### Параметры:
 
+* **nested** - Экземпляр схемы, класс, имя класса (строка), словарь или вызываемый объект, который возвращает схему или словарь. Словари конвертируются с помощью `Schema.from_dict`.
+* **exclude** - Список или кортеж полей для исключения.
+* **only** - Список или кортеж полей для маршалинга. Если `None`, маршалируются все поля. Этот параметр имеет приоритет над параметром **exclude**.
+* **many** - Является ли поле набором объектов.
+* **unknown** - Следует ли исключить, включить или вызвать ошибку для неизвестных полей в данных. Используйте EXCLUDE, INCLUDE или RAISE.
+* **kwargs** - Те же аргументы ключевого слова, которые получает [Field](polya-fields-a-f.md#field).
+
+| Методы                                          | Описание                                                                                                               |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| \_deserialize(value, attr, data\[, partial])    | То же, что и [Field.\_deserialize()](polya-fields-a-f.md#\_deserialize-4), но с дополнительным аргументом **partial**. |
+| \_serialize(nested\_obj, attr, obj, \*\*kwargs) | Сериализует значение в базовый тип данных Python.                                                                      |
+
+| Атрибуты                     | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+| schema                       | Вложенный объект схемы Schema.     |
+
+### \_deserialize(_value_, _attr_, _data_, _partial=None_, _\*\*kwargs_)
+
+То же, что и [Field.\_deserialize()](polya-fields-a-f.md#\_deserialize-4), но с дополнительным аргументом **partial**.
+
+#### Параметры:
+
+* **partial (bool | tuple)**- Для вложенных схем параметр **partial** передается в `Schema.load`.
+
+_Изменено в версии 3.0.0_: Добавлен параметр **partial**.
+
+### \_serialize(_value_, _attr_, _obj_, _\*\*kwargs_) → list\[Any] | None
+
+Сериализует **value** в базовый тип данных Python. Noop по умолчанию. Конкретные классы  [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+Пример:
+
+```python
+class TitleCase(Field):
+    def _serialize(self, value, attr, obj, **kwargs):
+        if not value:
+            return ''
+        return str(value).title()
+```
+
+#### Параметры:
+
+* **value** - Значение, которое нужно сериализовать
+* **attr** (_str_) - Атрибут или ключ объекта, который нужно сериализовать.
+* **obj** (_object_) - Объект, из которого было извлечено значение.
+* **kwargs** (_dict_) - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Возвращает**: Сериализованное значение.
+
+### default\_error\_messages _= {'type': 'Invalid type.'}_
+
+Сообщения об ошибках по умолчанию
+
+### _property_ schema
+
+Вложенный объект схемы Schema.
+
+_Изменено в версии 1.0.0_: **serializer** переименован в **schema**.
+
+## Number
+
+#### _class_ marshmallow.fields.Number(_\*_, _as\_string: bool = False_, _\*\*kwargs_)
+
+Базовый класс для числовых полей.
+
+#### Параметры:
+
+* **as\_string** (bool) - Если `True`, форматирует сериализованное значение как строку.
+* **kwargs** - Те же аргументы ключевого слова, которые получает [Field](polya-fields-a-f.md#field).
+
+| Методы                                       | Описание                                                                                                                                                                                            |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                                                                                                                                                                           |
+| \_format\_num(value)                         | Возвращает числовое значение для значения, учитывая **num\_type** этого поля.                                                                                                                       |
+| \_serialize(value, attr, obj, \*\*kwargs)    | Возвращает строку, если `self.as_string=True`, иначе возвращает **num\_type** этого поля.                                                                                                           |
+| \_validated(value)                           | Форматирует значение или вызывает [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), если возникнет ошибка. |
+
+| Атрибут                      | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+| Класс     | Описание                                                                                |
+| --------- | --------------------------------------------------------------------------------------- |
+| num\_type | псевдоним [float](https://python.readthedocs.io/en/latest/library/functions.html#float) |
+
+### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_) → \_T | None
+
+Десериализовать значение. Конкретные классы [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+#### Параметры:
+
+* **value** - Значение для десериализации
+* **attr** - Атрибут/ключ в данных для десериализации
+* **data** - Необработанные входные данные передаются в `Schema.load`.
+* **kwargs** - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Поднимает**: [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) - В случае сбоя форматирования или проверки.
+
+**Возвращает**: Десериализованное значение.
+
+_Изменено в версии 2.0.0_: Добавлены параметры **attr** и **data**.
+
+_Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в сигнатуру.
+
+### \_format\_num(_value_) → Any
+
+Возвращает числовое значение для значения, учитывая **num\_type** этого поля.
+
+### \_serialize(_value_, _attr_, _obj_, _\*\*kwargs_) → str | \_T | None
+
+Возвращает строку, если `self.as_string=True`, иначе возвращает **num\_type** этого поля.
+
+### \_validated(_value_) → \_T | None
+
+Форматирует значение или вызывает [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), если возникнет ошибка.
+
+### default\_error\_messages _= {'invalid': 'Not a valid number.', 'too\_large': 'Number too large.'}_
+
+Сообщения об ошибках по умолчанию.
+
+### num\_type
+
+Псевдоним для [float](https://python.readthedocs.io/en/latest/library/functions.html#float)
+
+| Методы num\_type     | Описание                                                                  |
+| -------------------- | ------------------------------------------------------------------------- |
+| as\_integer\_ratio() | Возвращает целочисленное отношение.                                       |
+| conjugate()          | Возвращает self, комплексное сопряжение любого числа с плавающей запятой. |
+| fromhex()            | Создает число с плавающей запятой из шестнадцатеричной строки.            |
+| hex()                | Возвращает шестнадцатеричное представление числа с плавающей запятой.     |
+| is\_integer()        | Возвратите True, если число с плавающей запятой является целым числом.    |
+
+| Атрибуты num\_type | Описание                                |
+| ------------------ | --------------------------------------- |
+| imag               | мнимая часть комплексного числа         |
+| real               | действительная часть комплексного числа |
+
+## Pluck
+
 ### _class_ marshmallow.fields.Pluck(_nested: SchemaABC | type | str | Callable\[\[], SchemaABC]_, _field\_name: str_, _\*\*kwargs_)
 
 ### _class_ marshmallow.fields.String(_\*, load\_default: typing.Any = \<marshmallow.missing>, missing: typing.Any = \<marshmallow.missing>, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, data\_key: str | None = None, attribute: str | None = None, validate: None | (typing.Callable\[\[typing.Any], typing.Any] | typing.Iterable\[typing.Callable\[\[typing.Any], typing.Any]]) = None, required: bool = False, allow\_none: bool | None = None, load\_only: bool = False, dump\_only: bool = False, error\_messages: dict\[str, str] | None = None, metadata: typing.Mapping\[str, typing.Any] | None = None, \*\*additional\_metadata_)
