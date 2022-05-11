@@ -810,8 +810,257 @@ _Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в �
 
 ## Pluck
 
-### _class_ marshmallow.fields.Pluck(_nested: SchemaABC | type | str | Callable\[\[], SchemaABC]_, _field\_name: str_, _\*\*kwargs_)
+#### _class_ marshmallow.fields.Pluck(_nested: SchemaABC | type | str | Callable\[\[], SchemaABC]_, _field\_name: str_, _\*\*kwargs_)
 
-### _class_ marshmallow.fields.String(_\*, load\_default: typing.Any = \<marshmallow.missing>, missing: typing.Any = \<marshmallow.missing>, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, data\_key: str | None = None, attribute: str | None = None, validate: None | (typing.Callable\[\[typing.Any], typing.Any] | typing.Iterable\[typing.Callable\[\[typing.Any], typing.Any]]) = None, required: bool = False, allow\_none: bool | None = None, load\_only: bool = False, dump\_only: bool = False, error\_messages: dict\[str, str] | None = None, metadata: typing.Mapping\[str, typing.Any] | None = None, \*\*additional\_metadata_)
+Позволяет заменить вложенные данные одним из полей данных.
+
+Пример:
+
+```python
+from marshmallow import Schema, fields
+
+class ArtistSchema(Schema):
+    id = fields.Int()
+    name = fields.Str()
+
+class AlbumSchema(Schema):
+    artist = fields.Pluck(ArtistSchema, 'id')
+
+in_data = {'artist': 42}
+loaded = AlbumSchema().load(in_data) # => {'artist': {'id': 42}}
+dumped = AlbumSchema().dump(loaded)  # => {'artist': 42}
+```
+
+#### Параметры:
+
+* **nested** (Schema) - Класс **Schema** или имя класса (строка) для вложения или `"self"` для вложения схемы в себя.
+* **field\_name** (str) - Ключ, из которого извлекается значение.
+* **kwargs** - Те же аргументы ключевого слова, которые получает [Nested](polya-fields-g-z.md#nested).
+
+| Методы                                          | Описание                                                                                                               |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| \_deserialize(value, attr, data\[, partial])    | То же, что и [Field.\_deserialize()](polya-fields-a-f.md#\_deserialize-4), но с дополнительным аргументом **partial**. |
+| \_serialize(nested\_obj, attr, obj, \*\*kwargs) | Сериализует значение в базовый тип данных Python.                                                                      |
+
+### \_deserialize(_value_, _attr_, _data_, _partial=None_, _\*\*kwargs_)
+
+То же, что и [Field.\_deserialize()](polya-fields-a-f.md#\_deserialize-4), но с дополнительным аргументом **partial**.
+
+#### Параметры:
+
+* **partial (bool | tuple)**- Для вложенных схем параметр **partial** передается в `Schema.load`.
+
+_Изменено в версии 3.0.0_: Добавлен параметр **partial**.
+
+### \_serialize(_nested\_obj_, _attr_, _obj_, _\*\*kwargs_) → list\[Any] | None
+
+Сериализует **value** в базовый тип данных Python. Noop по умолчанию. Конкретные классы  [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+Пример:
+
+```python
+class TitleCase(Field):
+    def _serialize(self, value, attr, obj, **kwargs):
+        if not value:
+            return ''
+        return str(value).title()
+```
+
+#### Параметры:
+
+* **value** - Значение, которое нужно сериализовать
+* **attr** (_str_) - Атрибут или ключ объекта, который нужно сериализовать.
+* **obj** (_object_) - Объект, из которого было извлечено значение.
+* **kwargs** (_dict_) - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Возвращает**: Сериализованное значение.
+
+## Raw
+
+#### _class_ marshmallow.fields.Raw(_\*, load\_default: typing.Any = \<marshmallow.missing>, missing: typing.Any = \<marshmallow.missing>, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, data\_key: str | None = None, attribute: str | None = None, validate: None | (typing.Callable\[\[typing.Any], typing.Any] | typing.Iterable\[typing.Callable\[\[typing.Any], typing.Any]]) = None, required: bool = False, allow\_none: bool | None = None, load\_only: bool = False, dump\_only: bool = False, error\_messages: dict\[str, str] | None = None, metadata: typing.Mapping\[str, typing.Any] | None = None, \*\*additional\_metadata_)
+
+Поле, к которому не применяется форматирование.
+
+## Str
+
+#### marshmallow.fields.Str
+
+Псевдоним [marshmallow.fields.String](polya-fields-g-z.md#undefined)
+
+#### Методы:
+
+| Метод                                        | Описание                                           |
+| -------------------------------------------- | -------------------------------------------------- |
+| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                          |
+| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python. |
+
+## String
+
+#### _class_ marshmallow.fields.String(_\*, load\_default: typing.Any = \<marshmallow.missing>, missing: typing.Any = \<marshmallow.missing>, dump\_default: typing.Any = \<marshmallow.missing>, default: typing.Any = \<marshmallow.missing>, data\_key: str | None = None, attribute: str | None = None, validate: None | (typing.Callable\[\[typing.Any], typing.Any] | typing.Iterable\[typing.Callable\[\[typing.Any], typing.Any]]) = None, required: bool = False, allow\_none: bool | None = None, load\_only: bool = False, dump\_only: bool = False, error\_messages: dict\[str, str] | None = None, metadata: typing.Mapping\[str, typing.Any] | None = None, \*\*additional\_metadata_)
+
+Строковое поле.
+
+#### Параметры:
+
+* **kwargs** - Те же аргументы ключевого слова, которые получает [Field](polya-fields-a-f.md#field).
+
+| Методы                                       | Описание                                           |
+| -------------------------------------------- | -------------------------------------------------- |
+| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                          |
+| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python. |
+
+| Атрибут                      | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_) → list\[Any]
+
+Десериализовать значение. Конкретные классы [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+#### Параметры:
+
+* **value** - Значение для десериализации
+* **attr** - Атрибут/ключ в данных для десериализации
+* **data** - Необработанные входные данные передаются в `Schema.load`.
+* **kwargs** - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Поднимает**: [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) - В случае сбоя форматирования или проверки.
+
+**Возвращает**: Десериализованное значение.
+
+_Изменено в версии 2.0.0_: Добавлены параметры **attr** и **data**.
+
+_Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в сигнатуру.
+
+### \_serialize(_value_, _attr_, _obj_, _\*\*kwargs_) → list\[Any] | None
+
+Сериализует **value** в базовый тип данных Python. Noop по умолчанию. Конкретные классы  [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+Пример:
+
+```python
+class TitleCase(Field):
+    def _serialize(self, value, attr, obj, **kwargs):
+        if not value:
+            return ''
+        return str(value).title()
+```
+
+#### Параметры:
+
+* **value** - Значение, которое нужно сериализовать
+* **attr** (_str_) - Атрибут или ключ объекта, который нужно сериализовать.
+* **obj** (_object_) - Объект, из которого было извлечено значение.
+* **kwargs** (_dict_) - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Возвращает**: Сериализованное значение.
+
+### default\_error\_messages _= {'invalid': 'Not a valid string.', 'invalid\_utf8': 'Not a valid utf-8 string.'}_
+
+Сообщения об ошибках по умолчанию.
+
+## Time
+
+#### _class_ marshmallow.fields.Time(_format: str | None = None_, _\*\*kwargs_)
+
+Отформатированная строка времени.
+
+Пример: `«03:12:58.019077»`
+
+#### Параметры:
+
+* **format** - Либо "iso" (для ISO8601), либо строка формата даты. Если нет, по умолчанию используется «iso».
+* **kwargs** - Те же аргументы ключевого слова, которые получает [Field](polya-fields-a-f.md#field).
+
+## TimeDelta
+
+#### _class_ marshmallow.fields.TimeDelta(_precision: str = 'seconds'_, _\*\*kwargs_)
+
+Поле, которое (де)сериализует объект [datetime.timedelta](https://python.readthedocs.io/en/latest/library/datetime.html#datetime.timedelta) в целое число и наоборот. Целое число может представлять количество дней, секунд или микросекунд.
+
+#### Параметры:
+
+* **precision** - Влияет на то, как целое число интерпретируется во время (де)сериализации. Должны быть «days», «seconds», «microseconds», «milliseconds», «minutes», «hours» или «weeks».
+* **kwargs** - Те же аргументы ключевого слова, которые получает [Field](polya-fields-a-f.md#field).
+
+_Изменено в версии 2.0.0_: всегда сериализуется в целочисленное значение, чтобы избежать ошибок округления. Добавьте параметр **precision**.
+
+| Методы                                       | Описание                                           |
+| -------------------------------------------- | -------------------------------------------------- |
+| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                          |
+| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python. |
+
+| Атрибут                      | Описание                           |
+| ---------------------------- | ---------------------------------- |
+| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+
+### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_) → list\[Any]
+
+Десериализовать значение. Конкретные классы [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+#### Параметры:
+
+* **value** - Значение для десериализации
+* **attr** - Атрибут/ключ в данных для десериализации
+* **data** - Необработанные входные данные передаются в `Schema.load`.
+* **kwargs** - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Поднимает**: [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) - В случае сбоя форматирования или проверки.
+
+**Возвращает**: Десериализованное значение.
+
+_Изменено в версии 2.0.0_: Добавлены параметры **attr** и **data**.
+
+_Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в сигнатуру.
+
+### \_serialize(_value_, _attr_, _obj_, _\*\*kwargs_) → list\[Any] | None
+
+Сериализует **value** в базовый тип данных Python. Noop по умолчанию. Конкретные классы  [Field](polya-fields-a-f.md#field) должны реализовывать этот метод.
+
+Пример:
+
+```python
+class TitleCase(Field):
+    def _serialize(self, value, attr, obj, **kwargs):
+        if not value:
+            return ''
+        return str(value).title()
+```
+
+#### Параметры:
+
+* **value** - Значение, которое нужно сериализовать
+* **attr** (_str_) - Атрибут или ключ объекта, который нужно сериализовать.
+* **obj** (_object_) - Объект, из которого было извлечено значение.
+* **kwargs** (_dict_) - Аргументы ключевого слова, специфичные для [Field](polya-fields-a-f.md#field).
+
+**Возвращает**: Сериализованное значение.
+
+### default\_error\_messages _= {'format': '{input!r} cannot be formatted as a timedelta.', 'invalid': 'Not a valid period of time.'}_
+
+Сообщения об ошибках по умолчанию.
+
+## Tuple
+
+#### _class_ marshmallow.fields.Tuple(_tuple\_fields_, _\*args_, _\*\*kwargs_)
+
+Поле кортежа, состоящее из фиксированного числа других классов или экземпляров поля.
+
+Пример:
+
+```python
+row = Tuple((fields.String(), fields.Integer(), fields.Float()))
+```
+
+{% hint style="info" %}
+Из-за структурированного характера [collections.namedtuple](https://python.readthedocs.io/en/latest/library/collections.html#collections.namedtuple) и [typing.NamedTuple](https://python.readthedocs.io/en/latest/library/typing.html#typing.NamedTuple) использование для них Schema внутри поля **Nested** является более подходящим, чем использование поля **Tuple**.
+{% endhint %}
+
+#### Параметры:
+
+* **tuple\_fields** (Iterable\[Field]) - Итерируемые классы полей или экземпляров.
+* **kwargs** - Те же аргументы ключевого слова, которые получает [Field](polya-fields-a-f.md#field).
+
+_Новое в версии 3.0.0rc4_.
 
 ### marshmallow.fields.URL
