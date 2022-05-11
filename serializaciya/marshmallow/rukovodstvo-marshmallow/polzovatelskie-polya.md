@@ -2,15 +2,15 @@
 
 Существует три способа создания поля пользовательского формата для схемы **Schema**:
 
-* Создайте пользовательский класс поля [Field](../api-marshmallow/polya-fields.md#class-marshmallow.fields.field-load\_default-typing.any-less-than-marshmallow.missing-greater-than-mi)
-* Используйте поле [Method](../api-marshmallow/polya-fields.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs)
-* Используйте поле [Function](../api-marshmallow/polya-fields.md#class-marshmallow.fields.function-serialize-none-or-callable-any-any-or-callable-any-dict-any-none-d)
+* Создайте пользовательский класс поля [Field](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.field-load\_default-typing.any-less-than-marshmallow.missing-greater-than-mi)
+* Используйте поле [Method](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs)
+* Используйте поле [Function](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.function-serialize-none-or-callable-any-any-or-callable-any-dict-any-none-d)
 
 Выбранный вами метод будет зависеть от того, как вы собираетесь повторно использовать поле.
 
 ## Создание класса поля Field
 
-Чтобы создать класс пользовательского поля, создайте подкласс [marshmallow.fields.Field](../api-marshmallow/polya-fields.md#class-marshmallow.fields.field-load\_default-typing.any-less-than-marshmallow.missing-greater-than-mi) и реализуйте его методы [\_serialize](../api-marshmallow/polya-fields.md#\_serialize-value-any-attr-str-obj-any-kwargs) и/или [\_deserialize](../api-marshmallow/polya-fields.md#\_deserialize-value-any-attr-str-or-none-data-mapping-str-any-or-none-kwargs).
+Чтобы создать класс пользовательского поля, создайте подкласс [marshmallow.fields.Field](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.field-load\_default-typing.any-less-than-marshmallow.missing-greater-than-mi) и реализуйте его методы [\_serialize](../api-marshmallow/polya-fields-a-f.md#\_serialize-value-any-attr-str-obj-any-kwargs) и/или [\_deserialize](../api-marshmallow/polya-fields-a-f.md#\_deserialize-value-any-attr-str-or-none-data-mapping-str-any-or-none-kwargs).
 
 ```python
 from marshmallow import fields, ValidationError
@@ -40,7 +40,7 @@ class UserSchema(Schema):
 
 ## Поля Method
 
-Поле метода [Method](../api-marshmallow/polya-fields.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs) будет сериализовано в значение, возвращаемое методом схемы. Метод должен принимать параметр **obj**, который является сериализуемым объектом.
+Поле метода [Method](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs) будет сериализовано в значение, возвращаемое методом схемы. Метод должен принимать параметр **obj**, который является сериализуемым объектом.
 
 ```python
 class UserSchema(Schema):
@@ -55,7 +55,7 @@ class UserSchema(Schema):
 
 ## Поля Function
 
-Поле [Function](../api-marshmallow/polya-fields.md#class-marshmallow.fields.function-serialize-none-or-callable-any-any-or-callable-any-dict-any-none-d) будет сериализовать значение функции, которое передается непосредственно в него. Как и поле [Method](../api-marshmallow/polya-fields.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs), функция должна принимать один аргумент **obj**.
+Поле [Function](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.function-serialize-none-or-callable-any-any-or-callable-any-dict-any-none-d) будет сериализовать значение функции, которое передается непосредственно в него. Как и поле [Method](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs), функция должна принимать один аргумент **obj**.
 
 ```python
 class UserSchema(Schema):
@@ -67,7 +67,7 @@ class UserSchema(Schema):
 
 ## Десериализация полей Method и Function
 
-И [Function](../api-marshmallow/polya-fields.md#class-marshmallow.fields.function-serialize-none-or-callable-any-any-or-callable-any-dict-any-none-d), и [Method](../api-marshmallow/polya-fields.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs) получают необязательный аргумент **deserialize**, который определяет способ десериализации поля. Метод или функция, переданные **deserialize**, получают входное значение для поля.
+И [Function](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.function-serialize-none-or-callable-any-any-or-callable-any-dict-any-none-d), и [Method](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs) получают необязательный аргумент **deserialize**, который определяет способ десериализации поля. Метод или функция, переданные **deserialize**, получают входное значение для поля.
 
 ```python
 class UserSchema(Schema):
@@ -87,7 +87,7 @@ result["balance"]  # => 100.0
 
 ## Добавление контекста к полям Method и Function
 
-Поле [Function](../api-marshmallow/polya-fields.md#class-marshmallow.fields.function-serialize-none-or-callable-any-any-or-callable-any-dict-any-none-d) или [Method](../api-marshmallow/polya-fields.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs) может нуждаться в информации о своей среде, чтобы знать, как сериализовать значение.
+Поле [Function](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.function-serialize-none-or-callable-any-any-or-callable-any-dict-any-none-d) или [Method](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.method-serialize-str-or-none-none-deserialize-str-or-none-none-kwargs) может нуждаться в информации о своей среде, чтобы знать, как сериализовать значение.
 
 В этих случаях вы можете установить атрибут **context** (словарь) схемы. Поля **Function** и **Method** будут иметь доступ к этому словарю.
 

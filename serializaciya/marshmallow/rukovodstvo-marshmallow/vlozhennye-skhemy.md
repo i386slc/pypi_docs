@@ -19,7 +19,7 @@ class Blog:
         self.author = author  # объект User
 ```
 
-Используйте вложенное поле [Nested](../api-marshmallow/polya-fields.md#class-marshmallow.fields.nested-nested-schemaabc-or-type-or-str-or-dict-str-field-or-type-or-typing.) для представления отношения, передавая вложенную схему.
+Используйте вложенное поле [Nested](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.nested-nested-schemaabc-or-type-or-str-or-dict-str-field-or-type-or-typing.) для представления отношения, передавая вложенную схему.
 
 ```python
 from marshmallow import Schema, fields
@@ -50,7 +50,7 @@ pprint(result)
 ```
 
 {% hint style="info" %}
-Если поле представляет собой набор вложенных объектов, передайте вложенное поле [Nested](../api-marshmallow/polya-fields.md#class-marshmallow.fields.nested-nested-schemaabc-or-type-or-str-or-dict-str-field-or-type-or-typing.) в список [List](../api-marshmallow/polya-fields.md#class-marshmallow.fields.list-cls\_or\_instance-field-or-type-kwargs).
+Если поле представляет собой набор вложенных объектов, передайте вложенное поле [Nested](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.nested-nested-schemaabc-or-type-or-str-or-dict-str-field-or-type-or-typing.) в список [List](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.list-cls\_or\_instance-field-or-type-kwargs).
 
 ```python
 collaborators = fields.List(fields.Nested(UserSchema))
@@ -91,7 +91,7 @@ pprint(result)
 # }
 ```
 
-Вы можете заменить вложенные данные одним значением (или плоским списком значений, если `many = True`), используя поле [Pluck](../api-marshmallow/polya-fields.md#class-marshmallow.fields.pluck-nested-schemaabc-or-type-or-str-or-callable-schemaabc-field\_name-str).
+Вы можете заменить вложенные данные одним значением (или плоским списком значений, если `many = True`), используя поле [Pluck](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.pluck-nested-schemaabc-or-type-or-str-or-callable-schemaabc-field\_name-str).
 
 ```python
 class UserSchema(Schema):
@@ -149,7 +149,7 @@ pprint(result)
 
 ## Двухсторонняя вложенность
 
-Если у вас есть два объекта, которые вложены друг в друга, вы можете передать вызываемый объект в [Nested](../api-marshmallow/polya-fields.md#class-marshmallow.fields.nested-nested-schemaabc-or-type-or-str-or-dict-str-field-or-type-or-typing.). Это позволяет решить проблемы с порядком объявления, например, когда одна схема вкладывает схему, которая объявлена под ней.
+Если у вас есть два объекта, которые вложены друг в друга, вы можете передать вызываемый объект в [Nested](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.nested-nested-schemaabc-or-type-or-str-or-dict-str-field-or-type-or-typing.). Это позволяет решить проблемы с порядком объявления, например, когда одна схема вкладывает схему, которая объявлена под ней.
 
 Например, представление модели **Author** может включать в себя книги, которые связаны с ней отношением «многие к одному». Соответственно, представление **Book** будет включать представление ее автора.
 
@@ -200,7 +200,7 @@ pprint(author_result, indent=2)
 # }
 ```
 
-Вы также можете передать имя класса в виде строки в [Nested](../api-marshmallow/polya-fields.md#class-marshmallow.fields.nested-nested-schemaabc-or-type-or-str-or-dict-str-field-or-type-or-typing.). Это полезно, чтобы избежать _**циклического импорта**_, когда ваши схемы расположены в разных модулях.
+Вы также можете передать имя класса в виде строки в [Nested](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.nested-nested-schemaabc-or-type-or-str-or-dict-str-field-or-type-or-typing.). Это полезно, чтобы избежать _**циклического импорта**_, когда ваши схемы расположены в разных модулях.
 
 ```python
 # books.py

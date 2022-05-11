@@ -19,7 +19,7 @@ class User:
         return "<User(name={self.name!r})>".format(self=self)
 ```
 
-Создайте схему, определив класс с переменными, сопоставляющими имена атрибутов объектам [Field](../api-marshmallow/polya-fields.md#class-marshmallow.fields.field-load\_default-typing.any-less-than-marshmallow.missing-greater-than-mi).
+Создайте схему, определив класс с переменными, сопоставляющими имена атрибутов объектам [Field](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.field-load\_default-typing.any-less-than-marshmallow.missing-greater-than-mi).
 
 ```python
 from marshmallow import Schema, fields
@@ -165,7 +165,7 @@ pprint(result)
 
 ## Валидация
 
-[Schema.load()](../api-marshmallow/#load-data-mapping-str-any-or-iterable-mapping-str-any-many-bool-or-none-none-partial-bool-or-types.s) (и ее аналог для декодирования JSON, [Schema.loads()](../api-marshmallow/#loads-json\_data-str-many-bool-or-none-none-partial-bool-or-types.strsequenceorset-or-none-none-unkno)) вызывает ошибку [ValidationError](../api-marshmallow/isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) при передаче недопустимых данных. Вы можете получить доступ к словарю ошибок проверки из атрибута `ValidationError.messages`. Данные, которые были правильно десериализованы, доступны в `ValidationError.valid_data`. Некоторые поля, такие как поля [Email](../api-marshmallow/polya-fields.md#class-marshmallow.fields.email-args-kwargs) и [URL](../api-marshmallow/polya-fields.md#marshmallow.fields.url), имеют встроенную проверку.
+[Schema.load()](../api-marshmallow/#load-data-mapping-str-any-or-iterable-mapping-str-any-many-bool-or-none-none-partial-bool-or-types.s) (и ее аналог для декодирования JSON, [Schema.loads()](../api-marshmallow/#loads-json\_data-str-many-bool-or-none-none-partial-bool-or-types.strsequenceorset-or-none-none-unkno)) вызывает ошибку [ValidationError](../api-marshmallow/isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema) при передаче недопустимых данных. Вы можете получить доступ к словарю ошибок проверки из атрибута `ValidationError.messages`. Данные, которые были правильно десериализованы, доступны в `ValidationError.valid_data`. Некоторые поля, такие как поля [Email](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.email-args-kwargs) и [URL](../api-marshmallow/polya-fields-a-f.md#marshmallow.fields.url), имеют встроенную проверку.
 
 ```python
 from marshmallow import ValidationError
@@ -451,7 +451,7 @@ class UserSchema(Schema):
         fields = ("name", "email", "created_at", "uppername")
 ```
 
-Обратите внимание, что **name** будет автоматически отформатировано как строка [String](../api-marshmallow/polya-fields.md#class-marshmallow.fields.string-load\_default-typing.any-less-than-marshmallow.missing-greater-than-m), а **created\_at** будет отформатировано как [DateTime](../api-marshmallow/polya-fields.md#class-marshmallow.fields.datetime-format-str-or-none-none-kwargs).
+Обратите внимание, что **name** будет автоматически отформатировано как строка [String](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.string-load\_default-typing.any-less-than-marshmallow.missing-greater-than-m), а **created\_at** будет отформатировано как [DateTime](../api-marshmallow/polya-fields-a-f.md#class-marshmallow.fields.datetime-format-str-or-none-none-kwargs).
 
 {% hint style="info" %}
 Если вместо этого вы хотите указать, какие имена полей следует включать _**в дополнение**_ к явно объявленным полям, вы можете использовать дополнительную опцию **additional**.
