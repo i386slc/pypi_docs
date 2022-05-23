@@ -54,7 +54,7 @@ class UserSchema(SQLAlchemyAutoSchema):
 
 #### OPTIONS\_CLASS
 
-псевдоним marshmallow\_sqlalchemy.schema.SQLAlchemyAutoSchemaOpts
+псевдоним [marshmallow\_sqlalchemy.schema.SQLAlchemyAutoSchemaOpts](ma-sa-api.md#sqlalchemyautoschemaopts)
 
 ### SQLAlchemyAutoSchemaOpts
 
@@ -68,5 +68,40 @@ class UserSchema(SQLAlchemyAutoSchema):
 ### SQLAlchemySchema
 
 #### _class_ marshmallow\_sqlalchemy.SQLAlchemySchema(_\*args_, _\*\*kwargs_)
+
+Схема для модели или таблицы SQLAlchemy. Используйте вместе с <mark style="color:red;">auto\_field</mark> для создания полей из столбцов.
+
+Пример:
+
+```python
+from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
+
+from mymodels import User
+
+class UserSchema(SQLAlchemySchema):
+    class Meta:
+        model = User
+
+    id = auto_field()
+    created_at = auto_field(dump_only=True)
+    name = auto_field()
+```
+
+#### OPTIONS\_CLASS
+
+псевдоним [marshmallow\_sqlalchemy.schema.SQLAlchemySchemaOpts](ma-sa-api.md#sqlalchemyschemaopts)
+
+### SQLAlchemySchemaOpts
+
+#### _class_ marshmallow\_sqlalchemy.SQLAlchemySchemaOpts(_meta_, _\*args_, _\*\*kwargs_)
+
+Класс параметров для [SQLAlchemySchema](ma-sa-api.md#sqlalchemyschema). Добавляет следующие опции:
+
+* **model** - Модель SQLAlchemy для создания схемы **Schema** (взаимоисключающий с параметром **table**).
+* **table** - Таблица SQLAlchemy, из которой создается схема **Schema** (взаимоисключающий с параметром **model**).
+* **load\_instance** - Загружать ли экземпляры модели.
+* **sqla\_session** - Сеанс SQLAlchemy, который будет использоваться для десериализации. Это необходимо только в том случае, если **load\_instance** имеет значение `True`. Вы также можете передать сеанс методу загрузки схемы.
+* **transient** - Следует ли загружать экземпляры модели в переходном состоянии (фактически игнорируя сеанс). Имеет значение только в том случае, если **load\_instance** имеет значение `True`.
+* **model\_converter** - Класс [ModelConverter](ma-sa-api.md#modelconverter) для преобразования модели SQLAlchemy в поля marshmallow.
 
 ## Поля Fields
