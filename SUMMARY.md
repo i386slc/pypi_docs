@@ -33,3 +33,8 @@
     * [Руководство по содействию](serializaciya/marshmallow/informaciya-o-proekte/rukovodstvo-po-sodeistviyu.md)
     * [Кодекс поведения](serializaciya/marshmallow/informaciya-o-proekte/kodeks-povedeniya.md)
     * [Честь и слава](serializaciya/marshmallow/informaciya-o-proekte/chest-i-slava.md)
+* [marshmallow-sqlalchemy](serializaciya/marshmallow-sqlalchemy/README.md)
+  * [(ma-sa) Быстрый старт](serializaciya/marshmallow-sqlalchemy/ma-sa-bystryi-start.md)
+  * [(ma-sa) Примеры](serializaciya/marshmallow-sqlalchemy/ma-sa-primery.md)
+  * [(ma-sa) API](serializaciya/marshmallow-sqlalchemy/ma-sa-api.md)
+  * [(ma-sa) Информация о проекте](serializaciya/marshmallow-sqlalchemy/ma-sa-informaciya-o-proekte.md)
