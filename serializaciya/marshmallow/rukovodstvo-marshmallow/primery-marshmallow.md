@@ -118,7 +118,7 @@ ERROR: package.json is invalid
 
 ## API анализа текста (Bottle+ TextBlob)
 
-Вот очень простой API анализа текста с использованием [Bottle](https://bottlepy.org) и [TextBlob](https://textblob.readthedocs.io/en/dev/), который демонстрирует, как объявить сериализатор объекта.
+Вот очень простой API анализа текста с использованием [Bottle](https://bottlepy.org/) и [TextBlob](https://textblob.readthedocs.io/en/dev/), который демонстрирует, как объявить сериализатор объекта.
 
 Предположим, что объекты **TextBlob** имеют свойства **polarity**, **subjectivity**, **noun\_phrase**, **tags** и **words**.
 
@@ -199,7 +199,7 @@ Server: WSGIServer/0.1 Python/2.7.5
 
 ## API цитат (Flask + SQLAlchemy)
 
-Ниже приведен полный пример REST API для приложения цитат, использующего [Flask](http://flask.pocoo.org) и [SQLAlchemy](https://www.sqlalchemy.org) с **marshmallow**. Он демонстрирует ряд особенностей, в том числе:
+Ниже приведен полный пример REST API для приложения цитат, использующего [Flask](http://flask.pocoo.org/) и [SQLAlchemy](https://www.sqlalchemy.org/) с **marshmallow**. Он демонстрирует ряд особенностей, в том числе:
 
 * Пользовательская проверка
 * Вложенные поля

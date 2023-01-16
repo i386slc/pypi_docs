@@ -2,7 +2,7 @@
 
 В экосистеме Python есть много отличных библиотек для форматирования данных и проверки схемы.
 
-На самом деле, на **marshmallow** повлиял ряд этих библиотек. **Marshmallow** вдохновлен [Django REST Framework](https://www.django-rest-framework.org), [Flask-RESTful](https://flask-restful.readthedocs.io) и [colander](https://docs.pylonsproject.org/projects/colander/en/latest/). Он заимствует ряд идей реализации и дизайна из этих библиотек, чтобы создать гибкое и продуктивное решение для сортировки, десортировки и проверки данных.
+На самом деле, на **marshmallow** повлиял ряд этих библиотек. **Marshmallow** вдохновлен [Django REST Framework](https://www.django-rest-framework.org/), [Flask-RESTful](https://flask-restful.readthedocs.io/) и [colander](https://docs.pylonsproject.org/projects/colander/en/latest/). Он заимствует ряд идей реализации и дизайна из этих библиотек, чтобы создать гибкое и продуктивное решение для сортировки, десортировки и проверки данных.
 
 Вот лишь несколько причин, по которым вы можете использовать **marshmallow**.
 
@@ -12,11 +12,11 @@
 
 ### Краткий, знакомый синтаксис.
 
-Если вы использовали [Django REST Framework](https://www.django-rest-framework.org) или [WTForms](https://wtforms.readthedocs.io/en/stable/), синтаксис схемы marshmallow [Schema](../api-marshmallow/skhema-schema.md#class-marshmallow.schema) покажется вам знакомым. Атрибуты полей уровня класса определяют схему форматирования данных. Конфигурация добавляется с использованием парадигмы класса **Meta**. Параметры конфигурации можно переопределить во время выполнения приложения, передав аргументы конструктору схемы. Методы [dump](../api-marshmallow/skhema-schema.md#dump) и [load](../api-marshmallow/skhema-schema.md#load) используются для сериализации и десериализации (конечно же!).
+Если вы использовали [Django REST Framework](https://www.django-rest-framework.org/) или [WTForms](https://wtforms.readthedocs.io/en/stable/), синтаксис схемы marshmallow [Schema](../api-marshmallow/skhema-schema.md#class-marshmallow.schema) покажется вам знакомым. Атрибуты полей уровня класса определяют схему форматирования данных. Конфигурация добавляется с использованием парадигмы класса **Meta**. Параметры конфигурации можно переопределить во время выполнения приложения, передав аргументы конструктору схемы. Методы [dump](../api-marshmallow/skhema-schema.md#dump) и [load](../api-marshmallow/skhema-schema.md#load) используются для сериализации и десериализации (конечно же!).
 
 ### Схемы на основе классов позволяют повторно использовать и настраивать код
 
-В отличие от [Flask-RESTful](https://flask-restful.readthedocs.io), который использует словари для определения выходных схем, **marshmallow** использует классы. Это позволяет легко повторно использовать и настраивать код. Он также позволяет использовать мощные средства для настройки и расширения схем, такие как [добавление поведения постобработки и обработки ошибок](../rukovodstvo-marshmallow/rasshirennye-skhemy.md).
+В отличие от [Flask-RESTful](https://flask-restful.readthedocs.io/), который использует словари для определения выходных схем, **marshmallow** использует классы. Это позволяет легко повторно использовать и настраивать код. Он также позволяет использовать мощные средства для настройки и расширения схем, такие как [добавление поведения постобработки и обработки ошибок](../rukovodstvo-marshmallow/rasshirennye-skhemy.md).
 
 ### Согласованность в сочетании с гибкостью
 
