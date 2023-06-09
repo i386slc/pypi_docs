@@ -4,44 +4,7 @@
 
 ## Классы:
 
-| Класс                                                                               | Описание                                                                                                                                                              |
-| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [AwareDateTime](polya-fields-a-f.md#awaredatetime)(\[format, default\_timezone])    | Отформатированная осведомленная строка даты и времени.                                                                                                                |
-| [Bool](polya-fields-a-f.md#bool)                                                    | псевдоним [marshmallow.fields.Boolean](polya-fields-a-f.md#boolean)                                                                                                   |
-| [Boolean](polya-fields-a-f.md#boolean)(\*\[, truthy, falsy])                        | Логическое поле                                                                                                                                                       |
-| [Constant](polya-fields-a-f.md#constant)(constant, \*\*kwargs)                      | Поле, которое (де)сериализуется в предустановленную константу.                                                                                                        |
-| [Date](polya-fields-a-f.md#date)(\[format])                                         | Строка даты в формате ISO8601.                                                                                                                                        |
-| [DateTime](polya-fields-a-f.md#datetime)(\[format])                                 | Отформатированная строка даты и времени.                                                                                                                              |
-| [Decimal](polya-fields-a-f.md#decimal)(\[places, rounding, allow\_nan, as\_string]) | Поле, которое (де)сериализуется в тип Python **decimal.Decimal**.                                                                                                     |
-| [Dict](polya-fields-a-f.md#dict)(\[keys, values])                                   | Поле словаря                                                                                                                                                          |
-| [Email](polya-fields-a-f.md#email)(\*args, \*\*kwargs)                              | Поле электронной почты                                                                                                                                                |
-| [Field](polya-fields-a-f.md#field)(\*, load\_default, missing, ...)                 | Основное поле, из которого должны расширяться другие поля                                                                                                             |
-| [Float](polya-fields-a-f.md#float)(\*\[, allow\_nan, as\_string])                   | **Double** как строка двойной точности IEEE-754                                                                                                                       |
-| [Function](polya-fields-a-f.md#function)(\[serialize, deserialize])                 | Поле, принимающее значение, возвращенное функцией                                                                                                                     |
-| [IP](polya-fields-g-z.md#ip)(\*args\[, exploded])                                   | Поле IP-адреса                                                                                                                                                        |
-| [IPInterface](polya-fields-g-z.md#ipinterface)(\*args\[, exploded])                 | Поле IP-интерфейса                                                                                                                                                    |
-| [IPv4](polya-fields-g-z.md#ipv4)(\*args\[, exploded])                               | Поле адреса IPv4                                                                                                                                                      |
-| [IPv4Interface](polya-fields-g-z.md#ipv4interface)(\*args\[, exploded])             | Поле сетевого интерфейса IPv4                                                                                                                                         |
-| [IPv6](polya-fields-g-z.md#ipv6)(\*args\[, exploded])                               | Поле адреса IPv6                                                                                                                                                      |
-| [IPv6Interface](polya-fields-g-z.md#ipv6interface)(\*args\[, exploded])             | Поле сетевого интерфейса IPv6                                                                                                                                         |
-| [Int](polya-fields-g-z.md#int)                                                      | псевдоним [marshmallow.fields.Integer](polya-fields-g-z.md#integer)                                                                                                   |
-| [Integer](polya-fields-g-z.md#integer)(\*\[, strict])                               | Целочисленное поле                                                                                                                                                    |
-| [List](polya-fields-g-z.md#list)(cls\_or\_instance, \*\*kwargs)                     | Поле списка, составленное из другого класса или экземпляра [Field](polya-fields-a-f.md#field)                                                                         |
-| [Mapping](polya-fields-g-z.md#mapping)(\[keys, values])                             | Абстрактный класс для объектов с парами ключ-значение                                                                                                                 |
-| [Method](polya-fields-g-z.md#method)(\[serialize, deserialize])                     | Поле, которое принимает значение, возвращаемое методом схемы                                                                                                          |
-| [NaiveDateTime](polya-fields-g-z.md#naivedatetime)(\[format, timezone])             | Отформатированная наивная строка даты и времени.                                                                                                                      |
-| [Nested](polya-fields-g-z.md#nested)(nested, ...)                                   | Позволяет вложить [Schema](skhema-schema.md#class-marshmallow.schema) внутрь поля.                                                                                    |
-| [Number](polya-fields-g-z.md#number)(\*\[, as\_string])                             | Базовый класс для числовых полей.                                                                                                                                     |
-| [Pluck](polya-fields-g-z.md#pluck)(nested, field\_name, \*\*kwargs)                 | Позволяет заменить вложенные данные одним из полей данных.                                                                                                            |
-| [Raw](polya-fields-g-z.md#raw)(\*, load\_default, missing, dump\_default, ...)      | Поле, к которому не применяется форматирование.                                                                                                                       |
-| [Str](polya-fields-g-z.md#str)                                                      | псевдоним [marshmallow.fields.String](polya-fields-g-z.md#string)                                                                                                     |
-| [String](polya-fields-g-z.md#string)(\*, load\_default, missing, ...)               | Строковое поле.                                                                                                                                                       |
-| [Time](polya-fields-g-z.md#time)(\[format])                                         | Отформатированная строка времени.                                                                                                                                     |
-| [TimeDelta](polya-fields-g-z.md#timedelta)(\[precision])                            | Поле, которое (де)сериализует объект [datetime.timedelta](https://python.readthedocs.io/en/latest/library/datetime.html#datetime.timedelta) в целое число и наоборот. |
-| [Tuple](polya-fields-g-z.md#tuple)(tuple\_fields, \*args, \*\*kwargs)               | Поле кортежа, состоящее из фиксированного числа других классов или экземпляров Field                                                                                  |
-| [URL](polya-fields-g-z.md#url)                                                      | псевдоним [marshmallow.fields.Url](polya-fields-g-z.md#url-1)                                                                                                         |
-| [UUID](polya-fields-g-z.md#uuid)(\*, load\_default, missing, dump\_default, ...)    | Поле UUID.                                                                                                                                                            |
-| [Url](polya-fields-g-z.md#url-1)(\*\[, relative, schemes, require\_tld])            | Поле URL.                                                                                                                                                             |
+<table><thead><tr><th width="326">Класс</th><th>Описание</th></tr></thead><tbody><tr><td><a href="polya-fields-a-f.md#awaredatetime">AwareDateTime</a>([format, default_timezone])</td><td>Отформатированная осведомленная строка даты и времени.</td></tr><tr><td><a href="polya-fields-a-f.md#bool">Bool</a></td><td>псевдоним <a href="polya-fields-a-f.md#boolean">marshmallow.fields.Boolean</a></td></tr><tr><td><a href="polya-fields-a-f.md#boolean">Boolean</a>(*[, truthy, falsy])</td><td>Логическое поле</td></tr><tr><td><a href="polya-fields-a-f.md#constant">Constant</a>(constant, **kwargs)</td><td>Поле, которое (де)сериализуется в предустановленную константу.</td></tr><tr><td><a href="polya-fields-a-f.md#date">Date</a>([format])</td><td>Строка даты в формате ISO8601.</td></tr><tr><td><a href="polya-fields-a-f.md#datetime">DateTime</a>([format])</td><td>Отформатированная строка даты и времени.</td></tr><tr><td><a href="polya-fields-a-f.md#decimal">Decimal</a>([places, rounding, allow_nan, as_string])</td><td>Поле, которое (де)сериализуется в тип Python <strong>decimal.Decimal</strong>.</td></tr><tr><td><a href="polya-fields-a-f.md#dict">Dict</a>([keys, values])</td><td>Поле словаря</td></tr><tr><td><a href="polya-fields-a-f.md#email">Email</a>(*args, **kwargs)</td><td>Поле электронной почты</td></tr><tr><td><a href="polya-fields-a-f.md#field">Field</a>(*, load_default, missing, ...)</td><td>Основное поле, из которого должны расширяться другие поля</td></tr><tr><td><a href="polya-fields-a-f.md#float">Float</a>(*[, allow_nan, as_string])</td><td><strong>Double</strong> как строка двойной точности IEEE-754</td></tr><tr><td><a href="polya-fields-a-f.md#function">Function</a>([serialize, deserialize])</td><td>Поле, принимающее значение, возвращенное функцией</td></tr><tr><td><a href="polya-fields-g-z.md#ip">IP</a>(*args[, exploded])</td><td>Поле IP-адреса</td></tr><tr><td><a href="polya-fields-g-z.md#ipinterface">IPInterface</a>(*args[, exploded])</td><td>Поле IP-интерфейса</td></tr><tr><td><a href="polya-fields-g-z.md#ipv4">IPv4</a>(*args[, exploded])</td><td>Поле адреса IPv4</td></tr><tr><td><a href="polya-fields-g-z.md#ipv4interface">IPv4Interface</a>(*args[, exploded])</td><td>Поле сетевого интерфейса IPv4</td></tr><tr><td><a href="polya-fields-g-z.md#ipv6">IPv6</a>(*args[, exploded])</td><td>Поле адреса IPv6</td></tr><tr><td><a href="polya-fields-g-z.md#ipv6interface">IPv6Interface</a>(*args[, exploded])</td><td>Поле сетевого интерфейса IPv6</td></tr><tr><td><a href="polya-fields-g-z.md#int">Int</a></td><td>псевдоним <a href="polya-fields-g-z.md#integer">marshmallow.fields.Integer</a></td></tr><tr><td><a href="polya-fields-g-z.md#integer">Integer</a>(*[, strict])</td><td>Целочисленное поле</td></tr><tr><td><a href="polya-fields-g-z.md#list">List</a>(cls_or_instance, **kwargs)</td><td>Поле списка, составленное из другого класса или экземпляра <a href="polya-fields-a-f.md#field">Field</a></td></tr><tr><td><a href="polya-fields-g-z.md#mapping">Mapping</a>([keys, values])</td><td>Абстрактный класс для объектов с парами ключ-значение</td></tr><tr><td><a href="polya-fields-g-z.md#method">Method</a>([serialize, deserialize])</td><td>Поле, которое принимает значение, возвращаемое методом схемы</td></tr><tr><td><a href="polya-fields-g-z.md#naivedatetime">NaiveDateTime</a>([format, timezone])</td><td>Отформатированная наивная строка даты и времени.</td></tr><tr><td><a href="polya-fields-g-z.md#nested">Nested</a>(nested, ...)</td><td>Позволяет вложить <a href="skhema-schema.md#class-marshmallow.schema">Schema</a> внутрь поля.</td></tr><tr><td><a href="polya-fields-g-z.md#number">Number</a>(*[, as_string])</td><td>Базовый класс для числовых полей.</td></tr><tr><td><a href="polya-fields-g-z.md#pluck">Pluck</a>(nested, field_name, **kwargs)</td><td>Позволяет заменить вложенные данные одним из полей данных.</td></tr><tr><td><a href="polya-fields-g-z.md#raw">Raw</a>(*, load_default, missing, dump_default, ...)</td><td>Поле, к которому не применяется форматирование.</td></tr><tr><td><a href="polya-fields-g-z.md#str">Str</a></td><td>псевдоним <a href="polya-fields-g-z.md#string">marshmallow.fields.String</a></td></tr><tr><td><a href="polya-fields-g-z.md#string">String</a>(*, load_default, missing, ...)</td><td>Строковое поле.</td></tr><tr><td><a href="polya-fields-g-z.md#time">Time</a>([format])</td><td>Отформатированная строка времени.</td></tr><tr><td><a href="polya-fields-g-z.md#timedelta">TimeDelta</a>([precision])</td><td>Поле, которое (де)сериализует объект <a href="https://python.readthedocs.io/en/latest/library/datetime.html#datetime.timedelta">datetime.timedelta</a> в целое число и наоборот.</td></tr><tr><td><a href="polya-fields-g-z.md#tuple">Tuple</a>(tuple_fields, *args, **kwargs)</td><td>Поле кортежа, состоящее из фиксированного числа других классов или экземпляров Field</td></tr><tr><td><a href="polya-fields-g-z.md#url">URL</a></td><td>псевдоним <a href="polya-fields-g-z.md#url-1">marshmallow.fields.Url</a></td></tr><tr><td><a href="polya-fields-g-z.md#uuid">UUID</a>(*, load_default, missing, dump_default, ...)</td><td>Поле UUID.</td></tr><tr><td><a href="polya-fields-g-z.md#url-1">Url</a>(*[, relative, schemes, require_tld])</td><td>Поле URL.</td></tr></tbody></table>
 
 ## IP
 
@@ -57,10 +20,7 @@ _Новое в версии 3.8.0_.
 
 #### Методы:
 
-| Метод                                        | Описание                                           |
-| -------------------------------------------- | -------------------------------------------------- |
-| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                          |
-| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python. |
+<table><thead><tr><th width="303">Метод</th><th>Описание</th></tr></thead><tbody><tr><td>_deserialize(value, attr, data, **kwargs)</td><td>Десериализовать значение.</td></tr><tr><td>_serialize(value, attr, obj, **kwargs)</td><td>Сериализует <strong>value</strong> в базовый тип данных Python.</td></tr></tbody></table>
 
 #### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_)→ ipaddress.IPv4Address | ipaddress.IPv6Address | None
 
@@ -748,9 +708,7 @@ _Изменено в версии 1.0.0_: **serializer** переименова�
 | \_serialize(value, attr, obj, \*\*kwargs)    | Возвращает строку, если `self.as_string=True`, иначе возвращает **num\_type** этого поля.                                                                                                           |
 | \_validated(value)                           | Форматирует значение или вызывает [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), если возникнет ошибка. |
 
-| Атрибут                      | Описание                           |
-| ---------------------------- | ---------------------------------- |
-| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+<table><thead><tr><th width="348.57142857142856">Атрибут</th><th>Описание</th></tr></thead><tbody><tr><td><strong>default_error_messages</strong></td><td>Сообщения об ошибках по умолчанию.</td></tr></tbody></table>
 
 | Класс     | Описание                                                                                |
 | --------- | --------------------------------------------------------------------------------------- |
@@ -889,10 +847,7 @@ class TitleCase(Field):
 
 #### Методы:
 
-| Метод                                        | Описание                                           |
-| -------------------------------------------- | -------------------------------------------------- |
-| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                          |
-| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python. |
+<table><thead><tr><th width="303">Метод</th><th>Описание</th></tr></thead><tbody><tr><td>_deserialize(value, attr, data, **kwargs)</td><td>Десериализовать значение.</td></tr><tr><td>_serialize(value, attr, obj, **kwargs)</td><td>Сериализует <strong>value</strong> в базовый тип данных Python.</td></tr></tbody></table>
 
 ## String
 
@@ -904,10 +859,7 @@ class TitleCase(Field):
 
 * **kwargs** - Те же аргументы ключевого слова, которые получает [Field](polya-fields-a-f.md#field).
 
-| Методы                                       | Описание                                           |
-| -------------------------------------------- | -------------------------------------------------- |
-| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                          |
-| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python. |
+<table><thead><tr><th width="150">Методы</th><th>Описание</th></tr></thead><tbody><tr><td>_deserialize(value, attr, data, **kwargs)</td><td>Десериализовать значение.</td></tr><tr><td>_serialize(value, attr, obj, **kwargs)</td><td>Сериализует <strong>value</strong> в базовый тип данных Python.</td></tr></tbody></table>
 
 | Атрибут                      | Описание                           |
 | ---------------------------- | ---------------------------------- |
@@ -985,10 +937,7 @@ class TitleCase(Field):
 
 _Изменено в версии 2.0.0_: всегда сериализуется в целочисленное значение, чтобы избежать ошибок округления. Добавьте параметр **precision**.
 
-| Методы                                       | Описание                                           |
-| -------------------------------------------- | -------------------------------------------------- |
-| \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                          |
-| \_serialize(value, attr, obj, \*\*kwargs)    | Сериализует **value** в базовый тип данных Python. |
+<table><thead><tr><th width="150">Методы</th><th>Описание</th></tr></thead><tbody><tr><td>_deserialize(value, attr, data, **kwargs)</td><td>Десериализовать значение.</td></tr><tr><td>_serialize(value, attr, obj, **kwargs)</td><td>Сериализует <strong>value</strong> в базовый тип данных Python.</td></tr></tbody></table>
 
 | Атрибут                      | Описание                           |
 | ---------------------------- | ---------------------------------- |
@@ -1145,9 +1094,7 @@ class TitleCase(Field):
 | \_deserialize(value, attr, data, \*\*kwargs) | Десериализовать значение.                                                                                                                                                                           |
 | \_validated(value)                           | Форматирует значение или вызывает [ValidationError](isklyucheniya.md#exception-marshmallow.exceptions.validationerror-message-str-or-list-or-dict-field\_name-str-\_schema), если возникнет ошибка. |
 
-| Атрибут                      | Описание                           |
-| ---------------------------- | ---------------------------------- |
-| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+<table><thead><tr><th width="348.57142857142856">Атрибут</th><th>Описание</th></tr></thead><tbody><tr><td><strong>default_error_messages</strong></td><td>Сообщения об ошибках по умолчанию.</td></tr></tbody></table>
 
 ### \_deserialize(_value_, _attr_, _data_, _\*\*kwargs_) → uuid.UUID | None
 
@@ -1192,9 +1139,7 @@ _Изменено в версии 3.0.0_: Добавлены **\*\*kwargs** в �
 * **schemes** - Действующие схемы. По умолчанию разрешены **http**, **https**, **ftp** и **ftps**.
 * **kwargs** - Те же аргументы ключевого слова, которые получает [String](polya-fields-g-z.md#string).
 
-| Атрибут                      | Описание                           |
-| ---------------------------- | ---------------------------------- |
-| **default\_error\_messages** | Сообщения об ошибках по умолчанию. |
+<table><thead><tr><th width="348.57142857142856">Атрибут</th><th>Описание</th></tr></thead><tbody><tr><td><strong>default_error_messages</strong></td><td>Сообщения об ошибках по умолчанию.</td></tr></tbody></table>
 
 ### default\_error\_messages _= {'invalid': 'Not a valid URL.'}_
 

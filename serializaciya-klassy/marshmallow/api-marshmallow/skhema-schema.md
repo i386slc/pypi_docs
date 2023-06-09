@@ -64,17 +64,17 @@ _Изменено в версии 2.0.0_: **\_\_validators\_\_**, **\_\_preproce
 
 ### Методы Schema
 
-| Название                                                                                   | Описание                                                                                       |
-| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| ****[**dump**](skhema-schema.md#dump)(obj, \*\[, many])                                    | Сериализует объект в собственные типы данных Python в соответствии с полями этой схемы.        |
-| ****[**dumps**](skhema-schema.md#dumps)(obj, \*args\[, many])                              | То же, что и dump(), за исключением того, что возвращает строку в формате JSON.                |
-| ****[**from\_dict**](skhema-schema.md#classmethod-from\_dict)(fields, \*\[, name])         | Создает класс Schema с учетом словаря полей.                                                   |
-| ****[**get\_attribute**](skhema-schema.md#get\_attribute)(obj, attr, default)              | Определяет, как извлекать значения из объекта для сериализации.                                |
-| ****[**handle\_error**](skhema-schema.md#handle\_error)(error, data, \*, many, \*\*kwargs) | Пользовательская функция обработчика ошибок для схемы.                                         |
-| ****[**load**](skhema-schema.md#load)(data, \*\[, many, partial, unknown])                 | Десериализует структуру данных в объект, определенный полями этой схемы.                       |
-| ****[**loads**](skhema-schema.md#loads)(json\_data, \*\[, many, partial, unknown])         | То же, что и load(), за исключением того, что в качестве входных данных принимает строку JSON. |
-| ****[**on\_bind\_field**](skhema-schema.md#on\_bind\_field)(field\_name, field\_obj)       | Перехватчик для изменения поля, когда оно привязано к схеме.                                   |
-| ****[**validate**](skhema-schema.md#validate)(data, \*\[, many, partial])                  | Проверяет данные по схеме, возвращая словарь ошибок проверки.                                  |
+| Название                                                                               | Описание                                                                                       |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [**dump**](skhema-schema.md#dump)(obj, \*\[, many])                                    | Сериализует объект в собственные типы данных Python в соответствии с полями этой схемы.        |
+| [**dumps**](skhema-schema.md#dumps)(obj, \*args\[, many])                              | То же, что и dump(), за исключением того, что возвращает строку в формате JSON.                |
+| [**from\_dict**](skhema-schema.md#classmethod-from\_dict)(fields, \*\[, name])         | Создает класс Schema с учетом словаря полей.                                                   |
+| [**get\_attribute**](skhema-schema.md#get\_attribute)(obj, attr, default)              | Определяет, как извлекать значения из объекта для сериализации.                                |
+| [**handle\_error**](skhema-schema.md#handle\_error)(error, data, \*, many, \*\*kwargs) | Пользовательская функция обработчика ошибок для схемы.                                         |
+| [**load**](skhema-schema.md#load)(data, \*\[, many, partial, unknown])                 | Десериализует структуру данных в объект, определенный полями этой схемы.                       |
+| [**loads**](skhema-schema.md#loads)(json\_data, \*\[, many, partial, unknown])         | То же, что и load(), за исключением того, что в качестве входных данных принимает строку JSON. |
+| [**on\_bind\_field**](skhema-schema.md#on\_bind\_field)(field\_name, field\_obj)       | Перехватчик для изменения поля, когда оно привязано к схеме.                                   |
+| [**validate**](skhema-schema.md#validate)(data, \*\[, many, partial])                  | Проверяет данные по схеме, возвращая словарь ошибок проверки.                                  |
 
 ### Класс Meta
 
@@ -171,7 +171,7 @@ _Изменено в версии 3.0.0rc9_: проверка больше не 
 
 #### fields_: Dict\[str, marshmallow.fields.Field]_
 
-Сопоставление словаря **field\_names** -> Объекты поля __ **Field**
+Сопоставление словаря **field\_names** -> Объекты поля **Field**
 
 ### classmethod from\_dict()
 
