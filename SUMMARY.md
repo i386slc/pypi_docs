@@ -38,6 +38,7 @@
     * [Руководство по содействию](serializaciya/marshmallow/informaciya-o-proekte/rukovodstvo-po-sodeistviyu.md)
     * [Кодекс поведения](serializaciya/marshmallow/informaciya-o-proekte/kodeks-povedeniya.md)
     * [Честь и слава](serializaciya/marshmallow/informaciya-o-proekte/chest-i-slava.md)
+* [marshmallow-dataclass](serializaciya-klassy/marshmallow-dataclass.md)
 * [marshmallow-sqlalchemy](serializaciya/marshmallow-sqlalchemy/README.md)
   * [(ma-sa) Быстрый старт](serializaciya/marshmallow-sqlalchemy/ma-sa-bystryi-start.md)
   * [(ma-sa) Примеры](serializaciya/marshmallow-sqlalchemy/ma-sa-primery.md)
