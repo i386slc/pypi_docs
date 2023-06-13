@@ -148,6 +148,10 @@ Bases: [watchdog.events.FileSystemEvent](watchdog.events.md#filesystemevent)
 
 ### FileSystemEventHandler
 
+#### _class_ watchdog.events.FileSystemEventHandler
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#FileSystemEventHandler)].
+
 Bases: object
 
 Базовый обработчик событий файловой системы, методы которого можно переопределить.
@@ -210,6 +214,108 @@ Bases: object
 
 ### PatternMatchingEventHandler
 
+#### _class_ watchdog.events.PatternMatchingEventHandler(_patterns=None_, _ignore\_patterns=None_, _ignore\_directories=False_, _case\_sensitive=False_)
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#PatternMatchingEventHandler)].
+
+Bases: [watchdog.events.FileSystemEventHandler](watchdog.events.md#filesystemeventhandler)
+
+Сопоставляет заданные шаблоны с путями к файлам, связанными с происходящими событиями.
+
+#### case\_sensitive
+
+(Только для чтения) `True`, если имена путей должны сопоставляться с учетом регистра; `False` в противном случае.
+
+#### dispatch(_event_)
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#PatternMatchingEventHandler.dispatch)].
+
+Отправляет события в соответствующие методы.
+
+**Параметры**: **event**([FileSystemEvent](watchdog.events.md#filesystemevent)) - Объект события, представляющий событие файловой системы.
+
+#### ignore\_directories
+
+(Только для чтения) `True`, если каталоги следует игнорировать; `False` в противном случае.
+
+#### ignore\_patterns
+
+(Только для чтения) Шаблоны для игнорирования соответствующих путей событий.
+
+#### patterns
+
+(Только для чтения) Шаблоны, позволяющие сопоставлять пути событий.
+
 ### RegexMatchingEventHandler
 
+#### _class_ watchdog.events.RegexMatchingEventHandler(_regexes=None_, _ignore\_regexes=None_, _ignore\_directories=False_, _case\_sensitive=False_)
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#RegexMatchingEventHandler)].
+
+Bases: [watchdog.events.FileSystemEventHandler](watchdog.events.md#filesystemeventhandler)
+
+Сопоставляет заданные регулярные выражения с путями к файлам, связанными с происходящими событиями.
+
+#### case\_sensitive
+
+(Только для чтения) `True`, если имена путей должны сопоставляться с учетом регистра; `False` в противном случае.
+
+#### dispatch(_event_)
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#RegexMatchingEventHandler.dispatch)].
+
+Отправляет события в соответствующие методы.
+
+**Параметры**: **event**([FileSystemEvent](watchdog.events.md#filesystemevent)) - Объект события, представляющий событие файловой системы.
+
+#### ignore\_directories
+
+(Только для чтения) `True`, если каталоги следует игнорировать; `False` в противном случае.
+
+#### ignore\_regexes
+
+(Только для чтения) Регулярные выражения для игнорирования соответствующих путей событий.
+
+#### regexes
+
+(Только для чтения) Регулярные выражения, позволяющие сопоставлять пути событий.
+
 ### LoggingEventHandler
+
+#### _class_ watchdog.events.LoggingEventHandler(_logger=None_)
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#LoggingEventHandler)].
+
+Записывает все захваченные события.
+
+#### on\_created(_event_)
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#LoggingEventHandler.on\_created)].
+
+Вызывается при создании файла или каталога.
+
+**Параметры**: **event**([DirCreatedEvent](watchdog.events.md#dircreatedevent) или [FileCreatedEvent](watchdog.events.md#filecreatedevent)) - Событие, представляющее создание файла/каталога.
+
+#### on\_deleted(_event_)
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#LoggingEventHandler.on\_deleted)].
+
+Вызывается при удалении файла или каталога.
+
+**Параметры**: **event**([DirDeletedEvent](watchdog.events.md#dirdeletedevent) или [FileDeletedEvent](watchdog.events.md#filedeletedevent)) - Событие, представляющее удаление файла/каталога.
+
+#### on\_modified(_event_)
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#LoggingEventHandler.on\_modified)].
+
+Вызывается при изменении файла или каталога.
+
+**Параметры**: **event**([DirModifiedEvent](watchdog.events.md#dirmodifiedevent) или [FileModifiedEvent](watchdog.events.md#filemodifiedevent)) - Событие, представляющее изменение файла/каталога.
+
+#### on\_moved(_event_)
+
+\[[Исходник](https://python-watchdog.readthedocs.io/en/stable/\_modules/watchdog/events.html#LoggingEventHandler.on\_moved)].
+
+Вызывается при перемещении или переименовании файла или каталога.
+
+**Параметры**: **event**([DirMovedEvent](watchdog.events.md#dirmovedevent) или [FileMovedEvent](watchdog.events.md#filemovedevent)) - Событие, представляющее перемещение файла/каталога.
