@@ -102,4 +102,7 @@
   * [aptsources.sourceslist](servery-seti-os-faily/python-apt/aptsources.sourceslist.md)
   * [Учебники python-apt](servery-seti-os-faily/python-apt/uchebniki-python-apt.md)
   * [Python APT и C++](servery-seti-os-faily/python-apt/python-apt-i-c++.md)
-* [watchdog](servery-seti-os-faily/watchdog.md)
+* [watchdog](servery-seti-os-faily/watchdog/README.md)
+  * [Установка watchdog](servery-seti-os-faily/watchdog/ustanovka-watchdog.md)
+  * [Быстрый старт watchdog](servery-seti-os-faily/watchdog/bystryi-start-watchdog.md)
+  * [API watchdog](servery-seti-os-faily/watchdog/api-watchdog.md)
