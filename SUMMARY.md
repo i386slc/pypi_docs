@@ -87,6 +87,7 @@
   * [Вопросы-ответы gunicorn](servery-seti-os-faily/gunicorn/voprosy-otvety-gunicorn.md)
   * [Сообщество gunicorn](servery-seti-os-faily/gunicorn/soobshestvo-gunicorn.md)
   * [Список изменений gunicorn](servery-seti-os-faily/gunicorn/spisok-izmenenii-gunicorn.md)
+* [pygtail](servery-seti-os-faily/pygtail.md)
 * [python-apt](servery-seti-os-faily/python-apt/README.md)
   * [Что нового в python-apt](servery-seti-os-faily/python-apt/chto-novogo-v-python-apt.md)
   * [apt\_pkg](servery-seti-os-faily/python-apt/apt\_pkg.md)
