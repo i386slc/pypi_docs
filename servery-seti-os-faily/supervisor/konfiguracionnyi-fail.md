@@ -1012,4 +1012,61 @@ serverurl=AUTO
 
 ## Настройки раздела `[eventlistener:x]`
 
+Supervisor позволяет определять специализированные однородные группы процессов («пулы прослушивателей событий») в файле конфигурации. Эти пулы содержат процессы, которые предназначены для получения и ответа на уведомления о событиях из системы событий supervisor. См. <mark style="color:purple;">События</mark> для объяснения того, как работают события и как реализовать программы, которые могут быть объявлены как прослушиватели событий.
+
+Обратите внимание, что все параметры, доступные для разделов `[program:x]`, учитываются разделами прослушивателя событий, за исключением **stdout\_capture\_maxbytes**. Прослушиватели событий не могут генерировать события связи процесса на стандартный вывод **stdout**, но могут генерировать на **stderr** (см. <mark style="color:purple;">Режим захвата</mark>).
+
+### Секция значений `[eventlistener:x]`
+
+Разделы `[eventlistener:x]` имеют несколько ключей, которых нет в разделах `[program:x]`.
+
+**`buffer_size`**
+
+Размер буфера очереди событий пула прослушивателей событий. Когда буфер событий пула прослушивателей переполняется (что может случиться, когда пул прослушивателей событий не справляется со всеми отправленными ему событиями), самое старое событие в буфере отбрасывается.
+
+**`events`**
+
+Список разделенных запятыми имен типов событий, для которых этот слушатель «заинтересован» в получении уведомлений (см. <mark style="color:purple;">Типы событий</mark> для списка допустимых имен типов событий).
+
+**`result_handler`**
+
+[Строка точки входа pkg\_resources](http://peak.telecommunity.com/DevCenter/PkgResources), которая разрешается в вызываемый объект Python. Значение по умолчанию — `supervisor.dispatchers:default_handler`. Указание альтернативного обработчика результатов — очень редкая вещь, и в результате способ его создания не задокументирован.
+
+Обратитесь к [настройкам раздела \[program:x\]](konfiguracionnyi-fail.md#nastroiki-razdela-program-x) для получения информации о других допустимых ключах, измените вышеуказанные ограничения и дополнения.
+
+### Пример секции `[eventlistener:x]`
+
+```ini
+[eventlistener:theeventlistenername]
+command=/bin/eventlistener
+process_name=%(program_name)s_%(process_num)02d
+numprocs=5
+events=PROCESS_STATE
+buffer_size=10
+directory=/tmp
+umask=022
+priority=-1
+autostart=true
+autorestart=unexpected
+startsecs=1
+startretries=3
+exitcodes=0
+stopsignal=QUIT
+stopwaitsecs=10
+stopasgroup=false
+killasgroup=false
+user=chrism
+redirect_stderr=false
+stdout_logfile=/a/path
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=10
+stdout_events_enabled=false
+stderr_logfile=/a/path
+stderr_logfile_maxbytes=1MB
+stderr_logfile_backups=10
+stderr_events_enabled=false
+environment=A="1",B="2"
+serverurl=AUTO
+```
+
 ## Настройки раздела `[rpcinterface:x]`
