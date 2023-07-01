@@ -1070,3 +1070,55 @@ serverurl=AUTO
 ```
 
 ## Настройки раздела `[rpcinterface:x]`
+
+Добавление параметров **rpcinterface:x** в файл конфигурации полезно только для тех, кто хочет расширить супервизора дополнительным пользовательским поведением.
+
+В образце файла конфигурации (см. [Создание файла конфигурации](ustanovka-supervisor.md#sozdanie-faila-konfiguracii)) есть раздел с именем `[rpcinterface:supervisor]`. По умолчанию это выглядит следующим образом.
+
+```ini
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+```
+
+Раздел `[rpcinterface:supervisor]` должен оставаться в конфигурации, чтобы стандартная настройка супервизора работала правильно. Если вы не хотите, чтобы супервизор делал что-то, чего он еще не делает по умолчанию, это все, что вам нужно знать об этом типе раздела.
+
+Однако, если вы хотите добавить пространства имен интерфейса rpc для настройки супервизора, вы можете добавить дополнительные разделы `[rpcinterface:foo]`, где «foo» представляет пространство имен интерфейса (из корня веб-сайта), а значение, названное `supervisor.rpcinterface_factory` — это вызываемая фабрика, которая должна иметь сигнатуру функции, которая принимает один позиционный аргумент **supervisord** и столько аргументов ключевого слова, сколько требуется для выполнения конфигурации. Любые дополнительные пары ключ/значение, определенные в разделе `[rpcinterface:x]`, будут переданы фабрике в качестве аргументов ключевого слова.
+
+Вот пример фабричной функции, созданной в файле `__init__.py` пакета Python `my.package`.
+
+```python
+from my.package.rpcinterface import AnotherRPCInterface
+
+def make_another_rpcinterface(supervisord, **config):
+    retries = int(config.get('retries', 0))
+    another_rpc_interface = AnotherRPCInterface(supervisord, retries)
+    return another_rpc_interface
+```
+
+И раздел в файле конфигурации, предназначенный для его настройки.
+
+```ini
+[rpcinterface:another]
+supervisor.rpcinterface_factory = my.package:make_another_rpcinterface
+retries = 1
+```
+
+### Секция значений `[rpcinterface:x]`
+
+**`supervisor.rpcinterface_factory`**
+
+**pkg\_resources** «точка входа» с точкой для фабричной функции вашего интерфейса RPC.
+
+_По умолчанию_: Не определено
+
+_Требуется_: Нет.
+
+_Введено_: 3.0
+
+### Пример секции `[rpcinterface:x]`
+
+```ini
+[rpcinterface:another]
+supervisor.rpcinterface_factory = my.package:make_another_rpcinterface
+retries = 1
+```
