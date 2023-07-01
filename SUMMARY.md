@@ -110,6 +110,7 @@
   * [Конфигурационный файл](servery-seti-os-faily/supervisor/konfiguracionnyi-fail.md)
   * [Субпроцессы](servery-seti-os-faily/supervisor/subprocessy.md)
   * [Ведение журнала](servery-seti-os-faily/supervisor/vedenie-zhurnala.md)
+  * [События supervisor](servery-seti-os-faily/supervisor/sobytiya-supervisor.md)
 * [watchdog](servery-seti-os-faily/watchdog/README.md)
   * [Установка watchdog](servery-seti-os-faily/watchdog/ustanovka-watchdog.md)
   * [Быстрый старт watchdog](servery-seti-os-faily/watchdog/bystryi-start-watchdog.md)
