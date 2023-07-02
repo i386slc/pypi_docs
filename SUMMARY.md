@@ -113,6 +113,7 @@
   * [События supervisor](servery-seti-os-faily/supervisor/sobytiya-supervisor.md)
   * [Расширение API Supervisor XML-RPC](servery-seti-os-faily/supervisor/rasshirenie-api-supervisor-xml-rpc.md)
   * [Обновление Supervisor 2 до 3](servery-seti-os-faily/supervisor/obnovlenie-supervisor-2-do-3.md)
+  * [Часто задаваемые вопросы](servery-seti-os-faily/supervisor/chasto-zadavaemye-voprosy.md)
 * [watchdog](servery-seti-os-faily/watchdog/README.md)
   * [Установка watchdog](servery-seti-os-faily/watchdog/ustanovka-watchdog.md)
   * [Быстрый старт watchdog](servery-seti-os-faily/watchdog/bystryi-start-watchdog.md)
