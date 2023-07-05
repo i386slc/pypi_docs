@@ -72,7 +72,8 @@
   * [click API](cli-ustanovka/click/click-api.md)
   * [click Разное](cli-ustanovka/click/click-raznoe.md)
 * [setuptools](cli-ustanovka/setuptools/README.md)
-  * [Руководство пользователя setuptools](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools.md)
+  * [Руководство пользователя setuptools](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/README.md)
+    * [Быстрый старт setuptools](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/bystryi-start-setuptools.md)
 
 ## Серверы, сети, ОС, файлы
 
