@@ -74,6 +74,7 @@
 * [setuptools](cli-ustanovka/setuptools/README.md)
   * [Руководство пользователя setuptools](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/README.md)
     * [Быстрый старт setuptools](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/bystryi-start-setuptools.md)
+    * [Обнаружение пакетов и пакеты пространства имен](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/obnaruzhenie-paketov-i-pakety-prostranstva-imen.md)
 
 ## Серверы, сети, ОС, файлы
 
