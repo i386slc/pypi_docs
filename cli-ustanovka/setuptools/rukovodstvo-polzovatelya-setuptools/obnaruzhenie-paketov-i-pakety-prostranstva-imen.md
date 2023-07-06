@@ -262,3 +262,65 @@ find = {}  # Сканирование неявных пространств им
 # ИЛИ
 find = {namespaces = false}  # Отключить неявные пространства имен
 ```
+
+### Поиск простых пакетов
+
+Начнем с первого инструмента. `find:` (`find_packages()`) берет исходный каталог и два списка шаблонов имен пакетов для исключения и включения, а затем возвращает список строк, представляющих пакеты, которые он может найти. Чтобы использовать его, рассмотрите следующий каталог:
+
+```
+mypkg
+├── pyproject.toml  # ИЛИ/И setup.cfg, setup.py
+└── src
+    ├── pkg1
+    │   └── __init__.py
+    ├── pkg2
+    │   └── __init__.py
+    ├── additional
+    │   └── __init__.py
+    └── pkg
+        └── namespace
+            └── __init__.py
+```
+
+Чтобы **setuptools** автоматически включал пакеты, найденные в **src**, которые начинаются с имени **pkg**, а не дополнительных:
+
+#### setup.cfg
+
+```ini
+[options]
+packages = find:
+package_dir =
+    =src
+
+[options.packages.find]
+where = src
+include = pkg*
+# альтернативно: `exclude = additional*`
+```
+
+#### setup.py
+
+```python
+setup(
+    # ...
+    packages=find_packages(
+        where='src',
+        include=['pkg*'],  # альтернативно: `exclude=['additional*']`
+    ),
+    package_dir={"": "src"}
+    # ...
+)
+```
+
+#### pyproject.toml (BETA)
+
+```toml
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pkg*"]  # альтернативно: `exclude = ["additional*"]`
+namespaces = false
+```
+
+{% hint style="info" %}
+При использовании `tool.setuptools.packages.find` в `pyproject.toml` **setuptools** по умолчанию будет учитывать <mark style="color:purple;">неявные пространства имен</mark> (implicit namespaces) при сканировании каталога вашего проекта. Чтобы предотвратить добавление **pkg.namespace** в список пакетов, вы можете установить `namespaces = false`. Это предотвратит сканирование любой папки без файла `__init__.py`.
+{% endhint %}
