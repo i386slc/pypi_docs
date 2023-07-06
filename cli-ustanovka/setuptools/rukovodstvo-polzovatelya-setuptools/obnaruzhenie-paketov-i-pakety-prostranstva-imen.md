@@ -34,7 +34,7 @@ setup(
 )
 ```
 
-#### pyproject.toml (BETA)
+#### pyproject.toml (BETA) [\[1\]](obnaruzhenie-paketov-i-pakety-prostranstva-imen.md#1)
 
 ```toml
 # ...
@@ -85,7 +85,7 @@ setup(
 )
 ```
 
-#### pyproject.toml (BETA)
+#### pyproject.toml (BETA) [\[1\]](obnaruzhenie-paketov-i-pakety-prostranstva-imen.md#1)
 
 ```toml
 [tool.setuptools]
@@ -119,7 +119,7 @@ mypkg = "lib"
 Автоматическое обнаружение — это **бета**-функция, которая может измениться в будущем. Дополнительные методы обнаружения см. в разделе <mark style="color:purple;">Выборочное обнаружение</mark>.
 {% endhint %}
 
-По умолчанию **setuptools** будет рассматривать 2 популярных макета проекта, каждый из которых имеет свой собственный набор преимуществ и недостатков \[2] \[3], как описано в следующих разделах.
+По умолчанию **setuptools** будет рассматривать 2 популярных макета проекта, каждый из которых имеет свой собственный набор преимуществ и недостатков [\[2\]](obnaruzhenie-paketov-i-pakety-prostranstva-imen.md#2) [\[3\]](obnaruzhenie-paketov-i-pakety-prostranstva-imen.md#3), как описано в следующих разделах.
 
 **Setuptools** автоматически просканирует каталог вашего проекта в поисках этих макетов и попытается угадать правильные значения для <mark style="color:purple;">packages</mark> и конфигурации <mark style="color:purple;">py\_modules</mark>.
 
@@ -253,7 +253,7 @@ from setuptools import find_packages
 from setuptools import find_namespace_packages
 ```
 
-#### pyproject.toml (BETA)
+#### pyproject.toml (BETA) [\[1\]](obnaruzhenie-paketov-i-pakety-prostranstva-imen.md#1)
 
 ```toml
 # ...
@@ -312,7 +312,7 @@ setup(
 )
 ```
 
-#### pyproject.toml (BETA)
+#### pyproject.toml (BETA) [\[1\]](obnaruzhenie-paketov-i-pakety-prostranstva-imen.md#1)
 
 ```toml
 [tool.setuptools.packages.find]
@@ -393,7 +393,7 @@ setup(
 )
 ```
 
-#### pyproject.toml (BETA)
+#### pyproject.toml (BETA) [\[1\]](obnaruzhenie-paketov-i-pakety-prostranstva-imen.md#1)
 
 ```toml
 [tool.setuptools.packages.find]
@@ -438,3 +438,69 @@ unzip -l dist/*.whl
 
 Для этого в вашей ОС должны быть установлены **tar** и **unzip**. В Windows вы также можете использовать программу с графическим интерфейсом, например [7zip](https://www.7-zip.org/).
 {% endhint %}
+
+## Устаревшие пакеты пространства имен
+
+Тот факт, что вы можете так легко создавать пакеты пространств имен выше, приписывается [PEP 420](https://peps.python.org/pep-0420/). Раньше было более громоздко добиваться того же результата. Исторически существовало два метода создания пакетов пространств имен. Один из них — это стиль **pkg\_resources**, поддерживаемый **setuptools**, а другой — стиль **pkgutils**, предлагаемый модулем **pkgutils** в Python. Оба теперь считаются _устаревшими_, несмотря на то, что они все еще присутствуют во многих существующих пакетах. Эти два отличаются многими тонкими, но важными аспектами, и вы можете узнать больше в [руководстве пользователя упаковки Python](https://packaging.python.org/guides/packaging-namespace-packages/).
+
+### Пакет пространства имен в стиле pkg\_resource
+
+Это метод, который **setuptools** напрямую поддерживает. Начиная с того же макета, вам нужно добавить к нему две части. Во-первых, файл `__init__.py` непосредственно в каталоге пакета вашего пространства имен, который содержит следующее:
+
+```python
+__import__("pkg_resources").declare_namespace(__name__)
+```
+
+И ключевое слово **namespace\_packages** в файле `setup.cfg` или `setup.py`:
+
+#### setup.cfg
+
+```ini
+[options]
+namespace_packages = timmins
+```
+
+#### setup.py
+
+```python
+setup(
+    # ...
+    namespace_packages=['timmins']
+)
+```
+
+И ваш каталог должен выглядеть так
+
+```
+foo
+├── pyproject.toml  # И/ИЛИ setup.cfg, setup.py
+└── src
+    └── timmins
+        ├── __init__.py
+        └── foo
+            └── __init__.py
+```
+
+Повторите то же самое для других пакетов, и вы сможете добиться того же результата, что и в предыдущем разделе.
+
+### Пакет пространства имен в стиле pkgutil
+
+Этот метод почти идентичен **pkg\_resource**, за исключением того, что объявление **namespace\_packages** опущено, а файл `__init__.py` содержит следующее:
+
+```python
+__path__ = __import__('pkgutil').extend_path(__path__, __name__)
+```
+
+Макет проекта остается прежним, и файл `pyproject.toml/setup.cfg` остается прежним.
+
+#### \[ 1 ]
+
+Поддержка добавления параметров конфигурации сборки через таблицу `[tool.setuptools]` в файле `pyproject.toml` все еще находится на стадии **бета**-тестирования. См. раздел <mark style="color:purple;">Настройка инструментов настройки с помощью файлов pyproject.toml</mark>.
+
+#### \[ 2 ]
+
+[https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure](https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure)
+
+#### \[ 3 ]
+
+[https://blog.ionelmc.ro/2017/09/25/rehashing-the-src-layout/](https://blog.ionelmc.ro/2017/09/25/rehashing-the-src-layout/)
