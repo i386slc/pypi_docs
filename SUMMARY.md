@@ -76,6 +76,15 @@
     * [Быстрый старт setuptools](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/bystryi-start-setuptools.md)
     * [Обнаружение пакетов и пакеты пространства имен](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/obnaruzhenie-paketov-i-pakety-prostranstva-imen.md)
     * [Управление зависимостями в Setuptools](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/upravlenie-zavisimostyami-v-setuptools.md)
+    * [Режим разработки (a.k.a. "Editable Installs")](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/rezhim-razrabotki-a.k.a.-editable-installs.md)
+    * [Точки входа (entry poynts)](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/tochki-vkhoda-entry-poynts.md)
+    * [Поддержка файлов данных](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/podderzhka-failov-dannykh.md)
+    * [Создание модулей расширения](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/sozdanie-modulei-rasshireniya.md)
+    * [Указание версии вашего проекта](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/ukazanie-versii-vashego-proekta.md)
+    * [Управление файлами в дистрибуции](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/upravlenie-failami-v-distribucii.md)
+    * [Расширение или настройка инструментов настройки](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/rasshirenie-ili-nastroika-instrumentov-nastroiki.md)
+    * [Настройка setuptools с помощью файлов setup.cfg](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/nastroika-setuptools-s-pomoshyu-failov-setup.cfg.md)
+    * [Настройка setuptools с помощью файлов pyproject.toml](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/nastroika-setuptools-s-pomoshyu-failov-pyproject.toml.md)
 
 ## Серверы, сети, ОС, файлы
 
