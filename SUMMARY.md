@@ -85,6 +85,7 @@
     * [Расширение или настройка инструментов настройки](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/rasshirenie-ili-nastroika-instrumentov-nastroiki.md)
     * [Настройка setuptools с помощью файлов setup.cfg](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/nastroika-setuptools-s-pomoshyu-failov-setup.cfg.md)
     * [Настройка setuptools с помощью файлов pyproject.toml](cli-ustanovka/setuptools/rukovodstvo-polzovatelya-setuptools/nastroika-setuptools-s-pomoshyu-failov-pyproject.toml.md)
+* [twine](cli-ustanovka/twine.md)
 
 ## Серверы, сети, ОС, файлы
 
